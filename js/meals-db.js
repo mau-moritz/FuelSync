@@ -20,6 +20,7 @@ const MEAL_DB = [
   { name:'Protein oats (oats + whey + milk)',    cat:'breakfast',    cal:490, carbs:58, protein:36, fat:10 },
   { name:'French toast with berries',            cat:'breakfast',    cal:400, carbs:55, protein:16, fat:12 },
   { name:'Cereal (Weetabix) with semi-skimmed', cat:'breakfast',    cal:300, carbs:54, protein:12, fat:4  },
+  { name:'TESTd', cat:'breakfast',    cal:300, carbs:54, protein:12, fat:4  },
 
   // ── LUNCH ──────────────────────────────────────────────────────────────
   { name:'Chicken & rice bowl',                  cat:'lunch',        cal:520, carbs:58, protein:42, fat:10 },
