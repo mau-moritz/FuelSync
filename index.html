@@ -11,1031 +11,807 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
   tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "surface-dim": "#0e0e0e",
-          "primary-dim": "#c2ed00",
-          "secondary-container": "#45474c",
-          "surface-bright": "#2c2c2c",
-          "surface-container-high": "#20201f",
-          "inverse-primary": "#536600",
-          "surface": "#0e0e0e",
-          "inverse-surface": "#fcf9f8",
-          "on-primary-container": "#4b5e00",
-          "surface-variant": "#262626",
-          "primary-fixed": "#cffc00",
-          "error": "#ff7351",
-          "on-secondary": "#505257",
-          "on-error-container": "#ffd2c8",
-          "secondary": "#e2e2e8",
-          "on-primary": "#536600",
-          "on-error": "#450900",
-          "surface-container-highest": "#262626",
-          "outline": "#767575",
-          "surface-container-low": "#131313",
-          "surface-tint": "#f4ffc8",
-          "on-surface": "#ffffff",
-          "on-background": "#ffffff",
-          "surface-container-lowest": "#000000",
-          "primary-fixed-dim": "#c2ed00",
-          "surface-container": "#1a1a1a",
-          "primary": "#f4ffc8",
-          "outline-variant": "#484847",
-          "on-primary-fixed": "#3b4a00",
-          "tertiary-container": "#fedf46",
-          "tertiary": "#ffeeab",
-          "on-secondary-container": "#cfd0d6",
-          "on-surface-variant": "#adaaaa",
-          "background": "#0e0e0e",
-          "primary-container": "#cffc00",
-          "error-container": "#b92902"
-        },
-        fontFamily: {
-          "headline": ["Lexend"],
-          "body": ["Inter"],
-          "label": ["Inter"]
-        },
-        borderRadius: {
-          "DEFAULT": "0.25rem",
-          "lg": "0.5rem",
-          "xl": "0.75rem",
-          "2xl": "1rem",
-          "full": "9999px"
-        },
+    darkMode:"class",
+    theme:{extend:{
+      colors:{
+        "surface-dim":"#0e0e0e","primary-dim":"#c2ed00","secondary-container":"#45474c",
+        "surface-bright":"#2c2c2c","surface-container-high":"#20201f","inverse-primary":"#536600",
+        "surface":"#0e0e0e","inverse-surface":"#fcf9f8","on-primary-container":"#4b5e00",
+        "surface-variant":"#262626","primary-fixed":"#cffc00","error":"#ff7351",
+        "on-secondary":"#505257","on-error-container":"#ffd2c8","secondary":"#e2e2e8",
+        "on-primary":"#536600","on-error":"#450900","surface-container-highest":"#262626",
+        "outline":"#767575","surface-container-low":"#131313","surface-tint":"#f4ffc8",
+        "on-surface":"#ffffff","on-background":"#ffffff","surface-container-lowest":"#000000",
+        "primary-fixed-dim":"#c2ed00","surface-container":"#1a1a1a","primary":"#f4ffc8",
+        "outline-variant":"#484847","on-primary-fixed":"#3b4a00","tertiary-container":"#fedf46",
+        "tertiary":"#ffeeab","on-secondary-container":"#cfd0d6","on-surface-variant":"#adaaaa",
+        "background":"#0e0e0e","primary-container":"#cffc00","error-container":"#b92902"
       },
-    },
+      fontFamily:{"headline":["Lexend","sans-serif"],"body":["Inter","sans-serif"],"label":["Inter","sans-serif"]},
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","2xl":"1rem","3xl":"1.5rem","full":"9999px"},
+    }},
   }
 </script>
 <style>
-  .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  }
-  .fill-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  .hide-scrollbar::-webkit-scrollbar { display: none; }
-  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-  /* Progress bar glow */
-  .progress-glow::after {
-    content: '';
-    position: absolute;
-    right: 0; top: 50%;
-    transform: translateY(-50%);
-    width: 6px; height: 6px;
-    border-radius: 9999px;
-    background: #f4ffc8;
-    box-shadow: 0 0 8px 3px rgba(244,255,200,0.6);
-  }
-
-  /* Page transitions */
-  .page { display: none; }
-  .page.active { display: block; animation: fadeUp 0.25s ease both; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Modal */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 200;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(8px);
-    display: none; align-items: flex-end; justify-content: center;
-    padding: 0;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal-sheet {
-    background: #1a1a1a;
-    border-radius: 1.5rem 1.5rem 0 0;
-    width: 100%; max-width: 48rem;
-    padding: 24px 24px 48px;
-    max-height: 90dvh;
-    overflow-y: auto;
-    outline: 1px solid rgba(72,72,71,0.3);
-    animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  @keyframes slideUp {
-    from { transform: translateY(60px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
-  }
-
-  /* Toast */
-  .toast {
-    position: fixed; bottom: 100px; left: 50%;
-    transform: translateX(-50%) translateY(30px);
-    background: #262626;
-    outline: 1px solid rgba(72,72,71,0.4);
-    border-radius: 9999px;
-    padding: 10px 20px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #f4ffc8;
-    z-index: 300;
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    white-space: nowrap;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* Input overrides */
-  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
-  input[type=date] { color-scheme: dark; }
-  select, input { outline: none !important; }
-  select:focus, input:focus, textarea:focus {
-    ring: 2px;
-    ring-color: rgba(244,255,200,0.3);
-  }
-
-  /* Range slider */
-  input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; }
-  input[type=range]::-webkit-slider-runnable-track {
-    height: 4px; border-radius: 9999px; background: #262626;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px; height: 20px; border-radius: 9999px;
-    background: #f4ffc8; margin-top: -8px;
-    border: 3px solid #0e0e0e;
-    box-shadow: 0 0 0 2px #f4ffc8;
-  }
-
-  /* Nav active glow */
-  .nav-active { box-shadow: 0 0 15px rgba(209,255,0,0.15); }
-
-  /* Section accent bar */
-  .accent-bar { width: 3px; height: 24px; background: #f4ffc8; border-radius: 9999px; }
-  .accent-bar-muted { width: 3px; height: 16px; background: rgba(173,170,170,0.3); border-radius: 9999px; }
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none}
+.icon-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+::-webkit-scrollbar{width:0}
+.page{display:none}
+.page.active{display:block;animation:fadeUp .22s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.progress-track{position:relative;overflow:visible}
+.progress-fill{height:100%;border-radius:9999px;transition:width .6s ease;position:relative}
+.progress-fill.glow::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:9999px;background:#f4ffc8;box-shadow:0 0 8px 4px rgba(244,255,200,.55)}
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:#1a1a1a;border-radius:1.5rem 1.5rem 0 0;width:100%;max-width:480px;padding:8px 24px 48px;max-height:92dvh;overflow-y:auto;outline:1px solid rgba(72,72,71,.25);box-shadow:0 -20px 60px rgba(0,0,0,.5);animation:sheetUp .28s cubic-bezier(.32,1.2,.64,1) both}
+@keyframes sheetUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+.sheet-handle{width:40px;height:4px;background:rgba(255,255,255,.15);border-radius:9999px;margin:12px auto 20px}
+.drawer-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none}
+.drawer-overlay.open{display:block}
+.drawer{position:fixed;top:0;left:0;bottom:0;z-index:301;width:min(280px,80vw);background:#131313;padding:0 0 32px;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .28s cubic-bezier(.32,1,.64,1);outline:1px solid rgba(72,72,71,.2)}
+.drawer-overlay.open .drawer{transform:translateX(0)}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#262626;outline:1px solid rgba(72,72,71,.4);border-radius:9999px;padding:10px 20px;font-family:'Inter',sans-serif;font-size:13px;color:#f4ffc8;z-index:400;opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;max-width:calc(100vw - 40px);overflow:hidden;text-overflow:ellipsis}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=date]{color-scheme:dark}
+input,select,textarea{outline:none!important;box-shadow:none!important}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:9999px;background:#262626}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:9999px;background:#f4ffc8;margin-top:-9px;border:3px solid #131313;box-shadow:0 0 0 2px #f4ffc8}
+input[type=range]::-moz-range-track{height:4px;border-radius:9999px;background:#262626}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:9999px;background:#f4ffc8;border:3px solid #131313;box-shadow:0 0 0 2px #f4ffc8}
+.nav-btn{transition:color .15s,background .15s;border-radius:12px}
+.nav-btn.active{color:#D1FF00;background:#262626;box-shadow:0 0 16px rgba(209,255,0,.12)}
+.nav-btn:not(.active){color:#adaaaa}
+.accent-bar{flex-shrink:0;width:3px;height:22px;background:#f4ffc8;border-radius:9999px}
+.accent-bar-muted{flex-shrink:0;width:3px;height:14px;background:rgba(173,170,170,.3);border-radius:9999px}
+button:focus-visible{outline:2px solid #f4ffc8;outline-offset:2px}
+@media(min-width:900px){
+  #app-shell{display:grid;grid-template-columns:260px 1fr;grid-template-rows:64px 1fr;min-height:100dvh}
+  #top-bar{grid-column:1/-1}
+  #sidebar{display:flex!important;grid-row:2;grid-column:1;border-right:1px solid rgba(72,72,71,.15)}
+  #bottom-nav{display:none!important}
+  #main-content{grid-row:2;grid-column:2;padding-bottom:48px!important;max-width:none}
+  .modal-sheet{max-width:520px}
+  #toast{bottom:24px}
+}
+@media(max-width:899px){#sidebar{display:none!important}}
 </style>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container" style="min-height:max(844px,100dvh)">
+<body class="bg-surface text-on-surface font-body" style="min-height:100dvh">
+<div id="app-shell">
 
-<!-- TOP APP BAR -->
-<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0e]/70 backdrop-blur-xl">
+<!-- TOP BAR -->
+<header id="top-bar" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-5 h-16 bg-[#0e0e0e]/80 backdrop-blur-xl" style="border-bottom:1px solid rgba(72,72,71,.15)">
   <div class="flex items-center gap-4">
-    <span class="material-symbols-outlined text-[#D1FF00] cursor-pointer">menu</span>
-    <h1 class="font-headline font-black uppercase tracking-widest text-xl text-[#D1FF00]">FUELSYNC</h1>
+    <button id="menu-btn" class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-surface-container transition-colors active:scale-90 transition-transform" aria-label="Open menu">
+      <span class="material-symbols-outlined text-[#D1FF00]">menu</span>
+    </button>
+    <h1 class="font-headline font-black uppercase tracking-widest text-xl text-[#D1FF00] select-none">FUELSYNC</h1>
   </div>
-  <div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden" style="outline: 2px solid #cffc00">
-    <div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
-      <span class="material-symbols-outlined text-on-surface-variant fill-icon">person</span>
-    </div>
-  </div>
+  <button id="header-profile-btn" aria-label="Go to profile" class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90 transition-transform" style="outline:2px solid #cffc00;outline-offset:1px">
+    <span class="material-symbols-outlined text-on-surface-variant icon-fill">person</span>
+  </button>
 </header>
 
-<!-- MAIN CONTENT -->
-<main class="pt-20 pb-32 px-5 max-w-2xl mx-auto">
+<!-- SIDEBAR (desktop) -->
+<aside id="sidebar" class="pt-16 flex-col bg-surface-container-low">
+  <nav class="flex flex-col gap-1 p-4 pt-6">
+    <p class="font-label text-[9px] text-on-surface-variant uppercase tracking-[0.2em] px-3 mb-2">Navigation</p>
+    <button class="sidebar-btn nav-btn active flex items-center gap-3 px-3 py-3 text-left w-full" data-page="dashboard"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Dashboard</span></button>
+    <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="training"><span class="material-symbols-outlined text-xl">fitness_center</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Training</span></button>
+    <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="fuel"><span class="material-symbols-outlined text-xl">local_fire_department</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Fuel Insights</span></button>
+    <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="profile"><span class="material-symbols-outlined text-xl">person</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Profile</span></button>
+  </nav>
+  <div class="mt-auto p-4">
+    <div class="rounded-xl p-4" style="background:rgba(244,255,200,.07);outline:1px solid rgba(244,255,200,.12)">
+      <p class="font-headline font-bold text-primary text-xs uppercase tracking-wider mb-1">Pro Tip</p>
+      <p class="text-xs text-on-surface-variant leading-relaxed">Log meals and workouts daily for the most accurate fuel insights.</p>
+    </div>
+  </div>
+</aside>
 
-  <!-- ====== DASHBOARD ====== -->
-  <div class="page active" id="page-dashboard">
-    <div class="space-y-5 pt-2">
+<!-- MAIN -->
+<main id="main-content" class="pt-20 pb-28 px-4 sm:px-5 w-full" style="max-width:560px;margin:0 auto">
 
-      <!-- Greeting -->
-      <div class="pt-2">
-        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]" id="dash-date-label">TODAY</p>
-        <h2 class="font-headline text-2xl font-extrabold tracking-tight" id="dash-greeting">Loading...</h2>
-      </div>
-
-      <!-- Calorie Hero Card -->
-      <div class="bg-surface-container rounded-2xl p-6 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-[0.03]" style="background: linear-gradient(135deg, #f4ffc8, #cffc00)"></div>
-        <div class="relative z-10">
-          <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] mb-1">Calories Today</p>
-          <div class="flex items-end gap-3 mb-5">
-            <span class="font-headline font-black text-6xl leading-none text-primary" id="dash-hero-cal">0</span>
-            <span class="font-label text-on-surface-variant text-sm mb-2" id="dash-hero-target">of — kcal</span>
-          </div>
-          <!-- Progress bar -->
-          <div class="relative h-2 bg-surface-container-highest rounded-full overflow-visible mb-6">
-            <div class="relative h-full rounded-full progress-glow transition-all duration-700"
-                 style="background: linear-gradient(90deg, #f4ffc8, #cffc00); width: 0%"
-                 id="dash-cal-bar"></div>
-          </div>
-          <!-- Macros -->
-          <div class="grid grid-cols-3 gap-4">
-            <div>
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Carbs</p>
-              <p class="font-headline font-bold text-xl text-primary" id="dash-carbs-val">0<span class="text-xs font-normal text-on-surface-variant ml-1" id="dash-carbs-tgt">/ —g</span></p>
-              <div class="h-1 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
-                <div class="h-full rounded-full bg-primary transition-all duration-700" style="width:0%" id="bar-carbs"></div>
-              </div>
-            </div>
-            <div>
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Protein</p>
-              <p class="font-headline font-bold text-xl" style="color:#ff7351" id="dash-prot-val">0<span class="text-xs font-normal text-on-surface-variant ml-1" id="dash-prot-tgt">/ —g</span></p>
-              <div class="h-1 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
-                <div class="h-full rounded-full transition-all duration-700" style="width:0%;background:#ff7351" id="bar-prot"></div>
-              </div>
-            </div>
-            <div>
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Fat</p>
-              <p class="font-headline font-bold text-xl text-tertiary" id="dash-fat-val">0<span class="text-xs font-normal text-on-surface-variant ml-1" id="dash-fat-tgt">/ —g</span></p>
-              <div class="h-1 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
-                <div class="h-full rounded-full bg-tertiary transition-all duration-700" style="width:0%" id="bar-fat"></div>
-              </div>
-            </div>
-          </div>
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="space-y-4 pt-2">
+    <div class="pt-1">
+      <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]" id="dash-date-label">TODAY</p>
+      <h2 class="font-headline text-2xl font-extrabold tracking-tight leading-tight" id="dash-greeting">Loading...</h2>
+    </div>
+    <!-- Calorie hero -->
+    <div class="bg-surface-container rounded-2xl p-5 relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(135deg,rgba(244,255,200,.04),transparent 60%)"></div>
+      <div class="relative z-10">
+        <div class="flex items-center justify-between mb-1">
+          <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Calories Today</p>
+          <span id="dash-training-level" class="font-label text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style="background:rgba(244,255,200,.1);color:#f4ffc8">— day</span>
         </div>
-      </div>
-
-      <!-- Stat bento -->
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-surface-container-highest rounded-2xl p-5 flex flex-col justify-between aspect-square active:scale-95 transition-all cursor-pointer" onclick="App.openMealModal()">
-          <span class="material-symbols-outlined text-primary-dim opacity-60">restaurant</span>
+        <div class="flex items-end gap-3 mb-4">
+          <span class="font-headline font-black leading-none text-primary" style="font-size:clamp(2.5rem,10vw,3.5rem)" id="dash-hero-cal">0</span>
+          <span class="font-label text-on-surface-variant text-sm mb-1" id="dash-hero-target">of — kcal</span>
+        </div>
+        <div class="progress-track h-2 bg-surface-container-highest rounded-full mb-5">
+          <div class="progress-fill" id="dash-cal-bar" style="background:linear-gradient(90deg,#f4ffc8,#cffc00);width:0%"></div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
           <div>
-            <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Meals</p>
-            <p class="font-headline font-black text-4xl text-primary" id="dash-meal-count">0</p>
-            <p class="font-label text-[10px] text-on-surface-variant mt-1">Tap to log</p>
+            <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Carbs</p>
+            <div class="flex items-baseline gap-1"><span class="font-headline font-bold text-lg text-primary" id="dash-carbs-val">0</span><span class="text-[10px] text-on-surface-variant" id="dash-carbs-tgt">/ —g</span></div>
+            <div class="progress-track h-1 bg-surface-container-highest rounded-full mt-2"><div class="progress-fill bg-primary" id="bar-carbs" style="width:0%"></div></div>
+            <p class="font-label text-[9px] text-on-surface-variant mt-1 opacity-70" id="dash-carb-range"></p>
+          </div>
+          <div>
+            <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Protein</p>
+            <div class="flex items-baseline gap-1"><span class="font-headline font-bold text-lg" style="color:#ff7351" id="dash-prot-val">0</span><span class="text-[10px] text-on-surface-variant" id="dash-prot-tgt">/ —g</span></div>
+            <div class="progress-track h-1 bg-surface-container-highest rounded-full mt-2"><div class="progress-fill" id="bar-prot" style="width:0%;background:#ff7351"></div></div>
+          </div>
+          <div>
+            <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Fat</p>
+            <div class="flex items-baseline gap-1"><span class="font-headline font-bold text-lg text-tertiary" id="dash-fat-val">0</span><span class="text-[10px] text-on-surface-variant" id="dash-fat-tgt">/ —g</span></div>
+            <div class="progress-track h-1 bg-surface-container-highest rounded-full mt-2"><div class="progress-fill bg-tertiary" id="bar-fat" style="width:0%"></div></div>
           </div>
         </div>
-        <div class="grid grid-rows-2 gap-4">
-          <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between active:scale-95 transition-all cursor-pointer" onclick="App.openWorkoutModal()">
-            <div>
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Workouts</p>
-              <p class="font-headline text-xl font-bold"><span id="dash-wo-count">0</span> <span class="text-xs font-light text-on-surface-variant">today</span></p>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant">fitness_center</span>
-          </div>
-          <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-            <div>
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Burned</p>
-              <p class="font-headline text-xl font-bold"><span id="dash-burned">0</span> <span class="text-xs font-light text-on-surface-variant">kcal</span></p>
-            </div>
+      </div>
+    </div>
+    <!-- Bento -->
+    <div class="grid grid-cols-2 gap-3">
+      <button onclick="App.openMealModal()" class="bg-surface-container-highest rounded-2xl p-5 flex flex-col justify-between text-left active:scale-95 transition-transform" style="min-height:140px">
+        <span class="material-symbols-outlined text-primary-dim opacity-60">restaurant</span>
+        <div>
+          <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Meals</p>
+          <p class="font-headline font-black text-4xl text-primary" id="dash-meal-count">0</p>
+          <p class="font-label text-[10px] text-on-surface-variant mt-0.5">Tap to log</p>
+        </div>
+      </button>
+      <div class="flex flex-col gap-3">
+        <button onclick="App.openWorkoutModal()" class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between active:scale-95 transition-transform flex-1">
+          <div><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Workouts</p><p class="font-headline text-xl font-bold"><span id="dash-wo-count">0</span> <span class="text-xs font-light text-on-surface-variant">today</span></p></div>
+          <span class="material-symbols-outlined text-on-surface-variant">fitness_center</span>
+        </button>
+        <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between flex-1">
+          <div><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Burned</p><p class="font-headline text-xl font-bold"><span id="dash-burned">0</span> <span class="text-xs font-light text-on-surface-variant">kcal</span></p></div>
+          <span class="material-symbols-outlined text-on-surface-variant">local_fire_department</span>
+        </div>
+      </div>
+    </div>
+    <!-- Week chart -->
+    <div class="bg-surface-container-low rounded-2xl p-5">
+      <header class="flex items-center gap-3 mb-4"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-xs">7-Day Fuel Coverage</h3></header>
+      <div class="flex items-end gap-1.5 h-16" id="dash-week-chart"></div>
+      <div class="flex justify-between mt-2 font-label text-[9px] text-on-surface-variant uppercase" id="dash-week-labels"></div>
+    </div>
+    <!-- Insights preview -->
+    <div>
+      <header class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Fuel Insights</h3></div>
+        <button onclick="App.navigate('fuel')" class="font-label text-[10px] text-primary uppercase tracking-widest px-2 py-1 rounded-lg hover:bg-primary/10 transition-colors">See all →</button>
+      </header>
+      <div id="dash-insights" class="space-y-3"></div>
+    </div>
+    <!-- CTAs -->
+    <div class="grid grid-cols-2 gap-3 pt-1">
+      <button onclick="App.openMealModal()" class="flex items-center justify-center gap-2 py-4 rounded-xl font-headline font-bold text-sm uppercase tracking-wider text-on-primary bg-primary active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-sm">add</span>Log Meal
+      </button>
+      <button onclick="App.openWorkoutModal()" class="flex items-center justify-center gap-2 py-4 rounded-xl font-headline font-bold text-sm uppercase tracking-wider text-on-secondary-container bg-secondary-container active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-sm">fitness_center</span>Workout
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TRAINING -->
+<div class="page" id="page-training">
+  <div class="space-y-5 pt-2">
+    <div class="flex items-center justify-between pt-1">
+      <div><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Daily Log</p><h2 class="font-headline text-2xl font-extrabold tracking-tight">Training &amp; Fuel</h2></div>
+      <div class="flex gap-2">
+        <button onclick="App.openMealModal()" aria-label="Log meal" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-lg">restaurant</span></button>
+        <button onclick="App.openWorkoutModal()" aria-label="Log workout" class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-lg">fitness_center</span></button>
+      </div>
+    </div>
+
+    <!-- Date Navigator -->
+    <div class="flex items-center gap-2 bg-surface-container-low rounded-2xl p-1">
+      <button onclick="App.shiftLogDate(-1)" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all"><span class="material-symbols-outlined text-lg">chevron_left</span></button>
+      <div class="flex-1 text-center">
+        <p class="font-headline font-bold text-sm" id="log-date-label">Today</p>
+        <p class="font-label text-[10px] text-on-surface-variant" id="log-date-sub"></p>
+      </div>
+      <button onclick="App.shiftLogDate(1)" id="log-date-next" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+    </div>
+
+    <!-- Day summary strip -->
+    <div id="log-day-summary" class="grid grid-cols-3 gap-3"></div>
+
+    <section>
+      <header class="flex items-center gap-3 mb-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Meals</h3></header>
+      <div id="log-meals-list" class="space-y-3"></div>
+    </section>
+    <section>
+      <header class="flex items-center gap-3 mb-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">Training Sessions</h3></header>
+      <div id="log-workouts-list" class="space-y-3"></div>
+    </section>
+  </div>
+</div>
+
+<!-- FUEL INSIGHTS -->
+<div class="page" id="page-fuel">
+  <div class="space-y-5 pt-2">
+    <div class="pt-1"><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Smart Analysis</p><h2 class="font-headline text-2xl font-extrabold tracking-tight">Fuel Insights</h2></div>
+    <section>
+      <header class="flex items-center gap-3 mb-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Today's Coaching</h3></header>
+      <div id="insights-list" class="space-y-3"></div>
+    </section>
+    <div id="goal-tip"></div>
+    <!-- Calculation Engine Breakdown -->
+    <div class="bg-surface-container rounded-2xl p-5 relative overflow-hidden">
+      <div class="absolute top-0 right-0 p-3 pointer-events-none select-none" style="opacity:.04"><span class="material-symbols-outlined" style="font-size:96px">calculate</span></div>
+      <header class="flex items-center gap-3 mb-4"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Your Targets Explained</h3></header>
+      <div id="fuel-macro-breakdown" class="space-y-1"></div>
+    </div>
+    <section>
+      <header class="flex items-center gap-3 mb-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">7-Day Overview</h3></header>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-surface-container-highest rounded-2xl p-5 flex flex-col justify-between" style="min-height:140px">
+          <span class="material-symbols-outlined text-primary-dim opacity-50">calendar_month</span>
+          <div><p class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Logged Days</p><p class="font-headline font-black text-4xl text-primary" id="week-days-logged">0</p><p class="font-label text-[10px] text-on-surface-variant">of 7 days</p></div>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between flex-1">
+            <div><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Avg Calories</p><p class="font-headline text-xl font-bold" id="week-avg-cal">—</p></div>
             <span class="material-symbols-outlined text-on-surface-variant">local_fire_department</span>
           </div>
+          <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between flex-1">
+            <div><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Train Days</p><p class="font-headline text-xl font-bold"><span id="week-workout-days">0</span><span class="text-xs font-light text-on-surface-variant"> / 7</span></p></div>
+            <span class="material-symbols-outlined text-on-surface-variant">fitness_center</span>
+          </div>
         </div>
       </div>
+    </section>
+    <div class="bg-surface-container rounded-2xl p-5 relative overflow-hidden">
+      <div class="absolute top-0 right-0 p-3 pointer-events-none select-none" style="opacity:.04"><span class="material-symbols-outlined" style="font-size:96px">monitoring</span></div>
+      <header class="flex items-center gap-3 mb-4"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Consistency Score</h3></header>
+      <div class="flex items-end gap-3 mb-3"><span class="font-headline font-black text-5xl text-primary" id="consistency-score">0</span><span class="font-label text-on-surface-variant text-sm mb-1">/ 100</span></div>
+      <div class="progress-track h-2 bg-surface-container-highest rounded-full"><div class="progress-fill" id="consistency-bar" style="background:linear-gradient(90deg,#f4ffc8,#cffc00);width:0%"></div></div>
+      <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-tight mt-3">Based on logging frequency, workout consistency &amp; calorie coverage</p>
+    </div>
+    <div class="bg-surface-container-low rounded-2xl p-5">
+      <header class="flex items-center gap-3 mb-4"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-xs">Calorie Coverage</h3></header>
+      <div class="flex items-end gap-1.5 h-16" id="insights-week-chart"></div>
+      <div class="flex justify-between mt-2 font-label text-[9px] text-on-surface-variant uppercase" id="insights-week-labels"></div>
+    </div>
+  </div>
+</div>
 
-      <!-- Week chart -->
-      <div class="bg-surface-container-low rounded-2xl p-5">
-        <header class="flex items-center gap-3 mb-4">
-          <div class="accent-bar-muted"></div>
-          <h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">7-Day Fuel Coverage</h3>
-        </header>
-        <div class="flex items-end gap-2 h-20" id="dash-week-chart"></div>
-        <div class="flex justify-between mt-2 font-label text-[9px] text-on-surface-variant uppercase tracking-wider" id="dash-week-labels"></div>
-      </div>
-
-      <!-- Insights -->
-      <div>
-        <header class="flex items-center justify-between mb-3 px-1">
-          <div class="flex items-center gap-3">
-            <div class="accent-bar"></div>
-            <h3 class="font-headline font-bold uppercase tracking-wider text-sm">Fuel Insights</h3>
-          </div>
-          <button class="font-label text-[10px] text-primary uppercase tracking-widest" onclick="App.navigate('insights')">See all</button>
-        </header>
-        <div id="dash-insights" class="space-y-3"></div>
-      </div>
-
-      <!-- CTAs -->
-      <div class="grid grid-cols-2 gap-3 pt-2">
-        <button onclick="App.openMealModal()"
-          class="flex items-center justify-center gap-2 py-4 rounded-xl font-headline font-bold text-sm uppercase tracking-wider text-on-primary bg-primary active:scale-95 transition-all">
-          <span class="material-symbols-outlined text-base">add</span> Log Meal
+<!-- PROFILE -->
+<div class="page" id="page-profile">
+  <div class="space-y-6 pt-2">
+    <!-- Identity -->
+    <section class="flex flex-col items-center text-center gap-4 pt-4">
+      <div class="relative">
+        <div class="absolute -inset-1 rounded-full blur opacity-20 pointer-events-none" style="background:linear-gradient(135deg,#f4ffc8,#cffc00)"></div>
+        <div class="relative w-28 h-28 rounded-full bg-surface-container-highest flex items-center justify-center" style="outline:3px solid #0e0e0e">
+          <span class="material-symbols-outlined icon-fill text-on-surface-variant" style="font-size:56px">person</span>
+        </div>
+        <button onclick="App.toast('Photo upload coming soon!')" aria-label="Edit photo" class="absolute bottom-1 right-1 bg-primary text-on-primary p-2 rounded-full active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-sm">edit</span>
         </button>
-        <button onclick="App.openWorkoutModal()"
-          class="flex items-center justify-center gap-2 py-4 rounded-xl font-headline font-bold text-sm uppercase tracking-wider text-on-secondary-container bg-secondary-container active:scale-95 transition-all">
-          <span class="material-symbols-outlined text-base">fitness_center</span> Workout
-        </button>
       </div>
-    </div>
-  </div>
-
-  <!-- ====== TRAINING (LOG) ====== -->
-  <div class="page" id="page-training">
-    <div class="space-y-5 pt-2">
-      <div class="flex items-center justify-between pt-2">
-        <div>
-          <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Daily Log</p>
-          <h2 class="font-headline text-2xl font-extrabold tracking-tight">Training & Fuel</h2>
-        </div>
-        <div class="flex gap-2">
-          <button onclick="App.openMealModal()" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-all">
-            <span class="material-symbols-outlined text-lg">restaurant</span>
-          </button>
-          <button onclick="App.openWorkoutModal()" class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center active:scale-90 transition-all">
-            <span class="material-symbols-outlined text-lg">fitness_center</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Meals -->
       <div>
-        <header class="flex items-center gap-3 mb-4 px-1">
-          <div class="accent-bar"></div>
-          <h3 class="font-headline font-bold uppercase tracking-wider text-sm">Meals</h3>
-        </header>
-        <div id="log-meals-list" class="space-y-3"></div>
+        <h2 class="font-headline text-2xl font-extrabold tracking-tight" id="prof-display-name">ATHLETE</h2>
+        <div class="flex items-center justify-center gap-1 text-on-surface-variant mt-1">
+          <span class="material-symbols-outlined text-sm">sports_score</span>
+          <span class="font-label text-xs uppercase tracking-widest" id="prof-display-goal">Set your goal</span>
+        </div>
       </div>
-
-      <!-- Workouts -->
-      <div class="pt-2">
-        <header class="flex items-center gap-3 mb-4 px-1">
-          <div class="accent-bar-muted"></div>
-          <h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">Training Sessions</h3>
-        </header>
-        <div id="log-workouts-list" class="space-y-3"></div>
-      </div>
+    </section>
+    <!-- Target chip -->
+    <div class="flex items-center gap-4 rounded-xl p-4" style="background:rgba(244,255,200,.08);outline:1px solid rgba(244,255,200,.15)">
+      <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-sm">bolt</span></div>
+      <div class="min-w-0"><p class="font-headline font-bold text-primary text-sm truncate" id="prof-tdee-display">— KCAL TARGET</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tight" id="prof-macro-display">Set your profile to calculate</p></div>
     </div>
-  </div>
-
-  <!-- ====== INSIGHTS (FUEL) ====== -->
-  <div class="page" id="page-fuel">
-    <div class="space-y-5 pt-2">
-      <div class="pt-2">
-        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Smart Analysis</p>
-        <h2 class="font-headline text-2xl font-extrabold tracking-tight">Fuel Insights</h2>
-      </div>
-
-      <!-- Today's insights -->
-      <div>
-        <header class="flex items-center gap-3 mb-4 px-1">
-          <div class="accent-bar"></div>
-          <h3 class="font-headline font-bold uppercase tracking-wider text-sm">Today's Coaching</h3>
-        </header>
-        <div id="insights-list" class="space-y-3"></div>
-      </div>
-
-      <!-- Goal tip -->
-      <div id="goal-tip"></div>
-
-      <!-- 7-day stats bento -->
-      <div>
-        <header class="flex items-center gap-3 mb-4 px-1">
-          <div class="accent-bar-muted"></div>
-          <h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">7-Day Overview</h3>
-        </header>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="col-span-1 bg-surface-container-highest rounded-2xl p-5 flex flex-col justify-between aspect-square">
-            <span class="material-symbols-outlined text-primary-dim opacity-50">calendar_month</span>
-            <div>
-              <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Logged Days</p>
-              <p class="font-headline font-black text-4xl text-primary" id="week-days-logged">0</p>
-              <p class="font-label text-[10px] text-on-surface-variant">of 7 days</p>
-            </div>
-          </div>
-          <div class="grid grid-rows-2 gap-4">
-            <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-              <div>
-                <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Avg Calories</p>
-                <p class="font-headline text-xl font-bold"><span id="week-avg-cal">—</span></p>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant">local_fire_department</span>
-            </div>
-            <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-              <div>
-                <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Train Days</p>
-                <p class="font-headline text-xl font-bold"><span id="week-workout-days">0</span> <span class="text-xs font-light text-on-surface-variant">/ 7</span></p>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant">fitness_center</span>
-            </div>
-          </div>
+    <!-- Physical metrics -->
+    <section>
+      <header class="flex items-center gap-3 mb-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Physical Metrics</h3></header>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-surface-container-highest rounded-2xl p-5 flex flex-col justify-between" style="min-height:130px">
+          <span class="material-symbols-outlined text-primary-dim opacity-50">badge</span>
+          <div><p class="font-label text-xs text-on-surface-variant uppercase tracking-widest mb-1">Name</p><input type="text" id="prof-name" placeholder="Your name" class="font-headline font-bold text-lg bg-transparent text-on-surface w-full border-none p-0 leading-tight placeholder:text-on-surface-variant/40"/></div>
         </div>
-      </div>
-
-      <!-- Consistency score -->
-      <div class="bg-surface-container rounded-2xl p-6 relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-5">
-          <span class="material-symbols-outlined text-9xl">monitoring</span>
-        </div>
-        <header class="flex items-center gap-3 mb-4">
-          <div class="accent-bar"></div>
-          <h3 class="font-headline font-bold uppercase tracking-wider text-sm">Consistency Score</h3>
-        </header>
-        <div class="flex items-end gap-4 mb-4">
-          <span class="font-headline font-black text-5xl text-primary" id="consistency-score">0</span>
-          <span class="font-label text-on-surface-variant text-sm mb-1">/ 100</span>
-        </div>
-        <div class="relative h-2 bg-surface-container-highest rounded-full overflow-visible">
-          <div class="relative h-full rounded-full progress-glow transition-all duration-700"
-               style="background: linear-gradient(90deg, #f4ffc8, #cffc00); width: 0%"
-               id="consistency-bar"></div>
-        </div>
-        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-tighter mt-3">Based on logging frequency, workout consistency & calorie coverage</p>
-      </div>
-
-      <!-- Week bar chart -->
-      <div class="bg-surface-container-low rounded-2xl p-5">
-        <header class="flex items-center gap-3 mb-4">
-          <div class="accent-bar-muted"></div>
-          <h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">Calorie Coverage</h3>
-        </header>
-        <div class="flex items-end gap-2 h-20" id="insights-week-chart"></div>
-        <div class="flex justify-between mt-2 font-label text-[9px] text-on-surface-variant uppercase tracking-wider" id="insights-week-labels"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== PROFILE ====== -->
-  <div class="page" id="page-profile">
-    <div class="space-y-8 pt-2">
-
-      <!-- Identity -->
-      <section class="flex flex-col items-center text-center space-y-4 pt-4">
-        <div class="relative group">
-          <div class="absolute -inset-1 rounded-full blur opacity-20" style="background: linear-gradient(135deg, #f4ffc8, #cffc00)"></div>
-          <div class="relative w-28 h-28 rounded-full overflow-hidden" style="outline: 3px solid #0e0e0e">
-            <div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
-              <span class="material-symbols-outlined text-4xl text-on-surface-variant fill-icon">person</span>
-            </div>
-          </div>
-          <button class="absolute bottom-1 right-1 bg-primary text-on-primary p-2 rounded-full shadow-lg active:scale-95 transition-transform">
-            <span class="material-symbols-outlined text-sm">edit</span>
-          </button>
-        </div>
-        <div>
-          <h2 class="font-headline text-2xl font-extrabold tracking-tight" id="prof-display-name">ATHLETE</h2>
-          <div class="flex items-center justify-center gap-1 text-on-surface-variant mt-1">
-            <span class="material-symbols-outlined text-sm">location_on</span>
-            <span class="font-label text-xs uppercase tracking-widest" id="prof-display-goal">Your goal here</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Targets display -->
-      <div class="bg-primary/10 rounded-xl p-4 flex items-center gap-4" style="outline: 1px solid rgba(244,255,200,0.15)">
-        <div class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined">bolt</span>
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="font-headline font-bold text-primary text-sm" id="prof-tdee-display">— KCAL TARGET</p>
-          <p class="text-[10px] text-on-surface-variant uppercase tracking-tight" id="prof-macro-display">Set your profile to calculate</p>
-        </div>
-      </div>
-
-      <!-- Physical Metrics bento -->
-      <section>
-        <header class="flex items-center gap-3 mb-4 px-1">
-          <div class="accent-bar"></div>
-          <h3 class="font-headline font-bold uppercase tracking-wider text-sm">Physical Metrics</h3>
-        </header>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="col-span-1 bg-surface-container-highest rounded-2xl p-5 flex flex-col justify-between" style="min-height: 140px">
-            <span class="material-symbols-outlined text-primary-dim opacity-50">person</span>
-            <div>
-              <p class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Name</p>
-              <input type="text" id="prof-name" placeholder="Your name"
-                class="font-headline font-bold text-xl bg-transparent text-on-surface w-full border-none focus:ring-0 p-0 mt-1 placeholder-on-surface-variant/40"/>
-            </div>
-          </div>
-          <div class="grid grid-rows-2 gap-4">
-            <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-              <div class="flex-1">
-                <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Age</p>
-                <input type="number" id="prof-age" placeholder="25" min="16" max="80"
-                  class="font-headline text-xl font-bold bg-transparent text-on-surface border-none focus:ring-0 p-0 w-full placeholder-on-surface-variant/40"/>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant">cake</span>
-            </div>
-            <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-              <div class="flex-1">
-                <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Sex</p>
-                <select id="prof-sex" class="font-headline text-sm font-bold bg-transparent text-on-surface border-none focus:ring-0 p-0 w-full appearance-none">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant">wc</span>
-            </div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="flex flex-col gap-3">
           <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-            <div class="flex-1">
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Weight</p>
-              <div class="flex items-baseline gap-1">
-                <input type="number" id="prof-weight" placeholder="75" min="40" max="200" step="0.5"
-                  class="font-headline text-xl font-bold bg-transparent text-on-surface border-none focus:ring-0 p-0 w-20 placeholder-on-surface-variant/40"/>
-                <span class="text-xs text-on-surface-variant">kg</span>
-              </div>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant">monitor_weight</span>
+            <div class="flex-1 min-w-0"><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Age</p><input type="number" id="prof-age" placeholder="25" min="16" max="80" class="font-headline text-xl font-bold bg-transparent text-on-surface border-none p-0 w-full placeholder:text-on-surface-variant/40"/></div>
+            <span class="material-symbols-outlined text-on-surface-variant shrink-0">cake</span>
           </div>
           <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
-            <div class="flex-1">
-              <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Height</p>
-              <div class="flex items-baseline gap-1">
-                <input type="number" id="prof-height" placeholder="175" min="140" max="220"
-                  class="font-headline text-xl font-bold bg-transparent text-on-surface border-none focus:ring-0 p-0 w-20 placeholder-on-surface-variant/40"/>
-                <span class="text-xs text-on-surface-variant">cm</span>
-              </div>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant">height</span>
+            <div class="flex-1 min-w-0"><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Sex</p><select id="prof-sex" class="font-headline text-sm font-bold bg-transparent text-on-surface border-none p-0 w-full appearance-none cursor-pointer"><option value="male">Male</option><option value="female">Female</option></select></div>
+            <span class="material-symbols-outlined text-on-surface-variant shrink-0 pointer-events-none">wc</span>
           </div>
         </div>
-      </section>
-
-      <!-- Upcoming Objective (like reference design) -->
-      <section class="bg-surface-container rounded-xl p-6 space-y-5 relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-5">
-          <span class="material-symbols-outlined text-9xl">sports_score</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-3">
+        <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
+          <div class="flex-1 min-w-0"><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Weight</p><div class="flex items-baseline gap-1"><input type="number" id="prof-weight" placeholder="75" min="40" max="300" step="0.5" class="font-headline text-xl font-bold bg-transparent text-on-surface border-none p-0 w-16 placeholder:text-on-surface-variant/40"/><span class="text-xs text-on-surface-variant">kg</span></div></div>
+          <span class="material-symbols-outlined text-on-surface-variant shrink-0">monitor_weight</span>
         </div>
-        <header class="flex items-center gap-3">
-          <div class="accent-bar"></div>
-          <h3 class="font-headline font-bold uppercase tracking-wider">Upcoming Objective</h3>
-        </header>
-        <div class="space-y-4 relative z-10">
-          <div class="space-y-2">
-            <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] ml-1">Focus Discipline</label>
-            <div class="relative">
-              <select id="prof-goal" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 appearance-none font-headline font-medium border-none focus:ring-2 focus:ring-primary/30 uppercase text-sm">
-                <option value="endurance">Marathon / Triathlon</option>
-                <option value="hybrid">HYROX / OCR / CrossFit</option>
-                <option value="strength">Strength / Power</option>
-                <option value="weight_loss">Performance + Fat Loss</option>
-              </select>
-              <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-            </div>
-          </div>
-          <div class="space-y-2">
-            <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] ml-1">Target Race / Event</label>
-            <input type="text" id="prof-race" placeholder="e.g. HYROX Munich, Berlin Marathon..."
-              class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 font-headline font-medium border-none focus:ring-2 focus:ring-primary/30 text-sm"/>
-          </div>
-          <div class="space-y-2">
-            <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] ml-1">Base Activity Level</label>
-            <div class="relative">
-              <select id="prof-activity" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 appearance-none font-headline font-medium border-none focus:ring-2 focus:ring-primary/30 text-sm">
-                <option value="sedentary">Sedentary</option>
-                <option value="light">Light (1-2x/week)</option>
-                <option value="moderate">Moderate (3-4x/week)</option>
-                <option value="active">Active (daily)</option>
-                <option value="very_active">Very Active (2x/day)</option>
-              </select>
-              <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-            </div>
-          </div>
+        <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
+          <div class="flex-1 min-w-0"><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Height</p><div class="flex items-baseline gap-1"><input type="number" id="prof-height" placeholder="175" min="100" max="250" class="font-headline text-xl font-bold bg-transparent text-on-surface border-none p-0 w-16 placeholder:text-on-surface-variant/40"/><span class="text-xs text-on-surface-variant">cm</span></div></div>
+          <span class="material-symbols-outlined text-on-surface-variant shrink-0">height</span>
         </div>
-      </section>
-
-      <!-- System Tuning -->
-      <section class="space-y-4">
-        <header class="flex items-center gap-3 px-1">
-          <div class="accent-bar-muted"></div>
-          <h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">System Tuning</h3>
-        </header>
-        <div class="bg-surface-container-low rounded-2xl overflow-hidden">
-          <div class="flex items-center justify-between p-5">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary-dim">straighten</span>
-              </div>
-              <div>
-                <p class="font-headline text-sm font-bold">Metric Units</p>
-                <p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Kilograms, Kilometers</p>
-              </div>
-            </div>
-            <div class="w-12 h-6 bg-primary rounded-full relative flex items-center px-1 cursor-pointer">
-              <div class="w-4 h-4 bg-on-primary rounded-full ml-auto"></div>
-            </div>
+      </div>
+    </section>
+    <!-- Upcoming objective -->
+    <section class="bg-surface-container rounded-xl p-5 relative overflow-hidden">
+      <div class="absolute top-0 right-0 p-3 pointer-events-none select-none" style="opacity:.05"><span class="material-symbols-outlined" style="font-size:96px">sports_score</span></div>
+      <header class="flex items-center gap-3 mb-5"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider">Upcoming Objective</h3></header>
+      <div class="space-y-4 relative z-10">
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Focus Discipline</label><div class="relative"><select id="prof-goal" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-5 pr-10 appearance-none font-headline font-medium border-none text-sm cursor-pointer uppercase"><option value="endurance">General Endurance</option><option value="marathon">Marathon</option><option value="hyrox">HYROX</option><option value="hybrid">HYROX / Hybrid</option><option value="strength">Strength / Power</option><option value="weight_loss">Performance + Fat Loss</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span></div></div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Target Race / Event</label><input type="text" id="prof-race" placeholder="e.g. HYROX Munich, Berlin Marathon..." class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-5 border-none font-headline font-medium text-sm placeholder:text-on-surface-variant/50"/></div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Base Activity Level</label><div class="relative"><select id="prof-activity" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-5 pr-10 appearance-none font-headline font-medium border-none text-sm cursor-pointer"><option value="sedentary">Sedentary</option><option value="light">Light (1-2x/week)</option><option value="moderate">Moderate (3-4x/week)</option><option value="active">Active (daily)</option><option value="very_active">Very Active (2x/day)</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span></div></div>
+        <div>
+          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Default Training Level <span class="normal-case opacity-60">(sets your daily macro targets)</span></label>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" data-level="light" onclick="App.selectProfLevel('light')" class="prof-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Light</button>
+            <button type="button" data-level="moderate" onclick="App.selectProfLevel('moderate')" class="prof-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#f4ffc8;color:#536600">Moderate</button>
+            <button type="button" data-level="hard" onclick="App.selectProfLevel('hard')" class="prof-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Hard</button>
           </div>
-          <div class="flex items-center justify-between p-5 cursor-pointer active:bg-surface-container-highest transition-colors group" style="border-top: 1px solid rgba(72,72,71,0.15)">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center">
-                <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">notifications</span>
-              </div>
-              <div>
-                <p class="font-headline text-sm font-bold">Smart Alerts</p>
-                <p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Fueling & Hydration windows</p>
-              </div>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-          </div>
+          <p class="font-label text-[10px] text-on-surface-variant mt-2">Light: ×30 kcal/kg · Moderate: ×35 kcal/kg · Hard: ×40 kcal/kg</p>
         </div>
-
-        <button onclick="App.saveProfile()"
-          class="w-full py-4 bg-primary text-on-primary font-headline font-bold uppercase tracking-[0.15em] rounded-xl active:scale-95 transition-all">
-          Save Profile
-        </button>
-
-        <button onclick="App.clearAllData()"
-          class="w-full py-4 text-error font-headline font-bold uppercase tracking-[0.2em] rounded-xl active:bg-error/10 transition-colors mt-2"
-          style="outline: 1px solid rgba(255,115,81,0.2)">
-          Terminate Session
-        </button>
-      </section>
-
-    </div>
+      </div>
+    </section>
+    <!-- System tuning -->
+    <section>
+      <header class="flex items-center gap-3 mb-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-xs">System Tuning</h3></header>
+      <div class="bg-surface-container-low rounded-2xl overflow-hidden">
+        <div class="flex items-center justify-between p-5">
+          <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary-dim">straighten</span></div><div><p class="font-headline text-sm font-bold">Metric Units</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Kilograms, Kilometers</p></div></div>
+          <button id="metric-toggle" aria-label="Toggle metric units" aria-pressed="true" onclick="App.toggleMetric(this)" class="w-12 h-6 rounded-full relative flex items-center px-1 transition-colors bg-primary">
+            <div id="metric-thumb" class="w-4 h-4 bg-on-primary rounded-full transition-all ml-auto"></div>
+          </button>
+        </div>
+        <div class="flex items-center justify-between p-5 cursor-pointer active:bg-surface-container-highest transition-colors group" style="border-top:1px solid rgba(72,72,71,.15)" onclick="App.toast('Smart alerts — coming soon!')">
+          <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">notifications</span></div><div><p class="font-headline text-sm font-bold">Smart Alerts</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Fueling &amp; Hydration windows</p></div></div>
+          <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+        </div>
+        <div class="flex items-center justify-between p-5 cursor-pointer active:bg-surface-container-highest transition-colors group" style="border-top:1px solid rgba(72,72,71,.15)" onclick="App.toast('All data stays on your device — 100% private.')">
+          <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">shield</span></div><div><p class="font-headline text-sm font-bold">Privacy</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Data stored locally only</p></div></div>
+          <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+        </div>
+      </div>
+      <button onclick="App.saveProfile()" class="w-full mt-4 py-4 bg-primary text-on-primary font-headline font-bold uppercase tracking-[0.15em] rounded-xl active:scale-95 transition-transform">Save Profile</button>
+      <button onclick="App.clearAllData()" class="w-full mt-3 py-4 font-headline font-bold uppercase tracking-[0.2em] rounded-xl active:scale-95 transition-transform text-error" style="outline:1px solid rgba(255,115,81,.2)">Terminate Session</button>
+    </section>
   </div>
+</div>
 
 </main>
 
 <!-- BOTTOM NAV -->
-<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 backdrop-blur-2xl rounded-t-2xl z-50"
-     style="background: rgba(14,14,14,0.85); border-top: 1px solid #262626; box-shadow: 0 -10px 30px rgba(0,0,0,0.5)">
-  <button class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-all active:scale-90 duration-150" data-page="dashboard">
-    <span class="material-symbols-outlined">grid_view</span>
-    <span class="font-headline text-[10px] font-medium tracking-widest uppercase">DASHBOARD</span>
-  </button>
-  <button class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-all active:scale-90 duration-150" data-page="training">
-    <span class="material-symbols-outlined">fitness_center</span>
-    <span class="font-headline text-[10px] font-medium tracking-widest uppercase">TRAINING</span>
-  </button>
-  <button class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-all active:scale-90 duration-150" data-page="fuel">
-    <span class="material-symbols-outlined">local_fire_department</span>
-    <span class="font-headline text-[10px] font-medium tracking-widest uppercase">FUEL</span>
-  </button>
-  <button class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform duration-150" data-page="profile">
-    <span class="material-symbols-outlined">person</span>
-    <span class="font-headline text-[10px] font-medium tracking-widest uppercase">PROFILE</span>
-  </button>
+<nav id="bottom-nav" class="fixed bottom-0 left-0 w-full flex justify-around items-center px-3 pb-5 pt-2 z-50" style="background:rgba(14,14,14,.88);backdrop-filter:blur(20px);border-top:1px solid #262626;box-shadow:0 -8px 24px rgba(0,0,0,.4)">
+  <button class="nav-btn bottom-nav-btn active flex flex-col items-center gap-0.5 px-4 py-2" data-page="dashboard" aria-label="Dashboard"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Dashboard</span></button>
+  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="training" aria-label="Training"><span class="material-symbols-outlined text-xl">fitness_center</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Training</span></button>
+  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="fuel" aria-label="Fuel"><span class="material-symbols-outlined text-xl">local_fire_department</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Fuel</span></button>
+  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="profile" aria-label="Profile"><span class="material-symbols-outlined text-xl">person</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Profile</span></button>
 </nav>
 
-<!-- ===== MODAL: ONBOARDING ===== -->
-<div class="modal-overlay" id="modal-onboarding">
-  <div class="modal-sheet">
-    <div class="flex items-center justify-between mb-6">
-      <div>
-        <p class="font-label text-[10px] text-primary uppercase tracking-[0.2em] mb-1">Welcome to</p>
-        <h2 class="font-headline text-2xl font-extrabold uppercase tracking-tight">FuelSync ⚡</h2>
-      </div>
-    </div>
-    <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Set up your profile to get personalized fuel targets tailored to your training.</p>
+</div><!-- /app-shell -->
 
+<!-- DRAWER -->
+<div id="drawer-overlay" class="drawer-overlay" onclick="App.closeDrawer()">
+  <div class="drawer" onclick="event.stopPropagation()">
+    <div class="flex items-center gap-3 px-5 h-16" style="border-bottom:1px solid rgba(72,72,71,.2)"><h2 class="font-headline font-black text-xl text-[#D1FF00] uppercase tracking-widest">FuelSync</h2></div>
+    <nav class="flex flex-col gap-1 p-4">
+      <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="dashboard"><span class="material-symbols-outlined text-on-surface-variant">grid_view</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Dashboard</span></button>
+      <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="training"><span class="material-symbols-outlined text-on-surface-variant">fitness_center</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Training</span></button>
+      <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="fuel"><span class="material-symbols-outlined text-on-surface-variant">local_fire_department</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Fuel Insights</span></button>
+      <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="profile"><span class="material-symbols-outlined text-on-surface-variant">person</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Profile</span></button>
+    </nav>
+    <div class="mt-auto p-4">
+      <button onclick="App.clearAllData();App.closeDrawer()" class="flex items-center gap-3 px-3 py-3 rounded-xl w-full hover:bg-error/10 transition-colors text-error"><span class="material-symbols-outlined">delete_forever</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Clear All Data</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-onboarding" onclick="if(event.target===this&&FS.getP().onboarded)document.getElementById('modal-onboarding').classList.remove('open')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="mb-5">
+      <p class="font-label text-[10px] text-primary uppercase tracking-[0.2em] mb-1">Welcome to</p>
+      <h2 class="font-headline text-2xl font-extrabold uppercase tracking-tight">FuelSync ⚡</h2>
+      <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Set up your profile to unlock personalised fuel targets based on your bodyweight and training level.</p>
+    </div>
     <div class="space-y-4">
       <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Name</label>
-          <input type="text" id="ob-name" placeholder="e.g. Alex"
-            class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline"/>
-        </div>
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Sex</label>
-          <select id="ob-sex" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline appearance-none">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Name</label><input type="text" id="ob-name" placeholder="e.g. Alex" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Sex</label><div class="relative"><select id="ob-sex" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline appearance-none cursor-pointer"><option value="male">Male</option><option value="female">Female</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
       </div>
       <div class="grid grid-cols-3 gap-3">
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Age</label>
-          <input type="number" id="ob-age" placeholder="25" min="16" max="80"
-            class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-4 border-none text-sm font-headline"/>
-        </div>
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Weight kg</label>
-          <input type="number" id="ob-weight" placeholder="75" step="0.5"
-            class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-4 border-none text-sm font-headline"/>
-        </div>
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Height cm</label>
-          <input type="number" id="ob-height" placeholder="175"
-            class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-4 border-none text-sm font-headline"/>
-        </div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Age</label><input type="number" id="ob-age" placeholder="25" min="16" max="80" inputmode="numeric" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Weight kg</label><input type="number" id="ob-weight" placeholder="75" step="0.5" inputmode="decimal" oninput="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Height cm</label><input type="number" id="ob-height" placeholder="175" inputmode="numeric" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
       </div>
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Primary Goal</label><div class="relative"><select id="ob-goal" onchange="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer uppercase"><option value="endurance">General Endurance</option><option value="marathon">Marathon</option><option value="hyrox">HYROX</option><option value="hybrid">Hybrid — HYROX / OCR / CrossFit</option><option value="strength">Strength / Power</option><option value="weight_loss">Performance + Fat Loss</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
       <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Primary Goal</label>
-        <div class="relative">
-          <select id="ob-goal" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline appearance-none uppercase">
-            <option value="endurance">Endurance — Marathon / Triathlon</option>
-            <option value="hybrid">Hybrid — HYROX / OCR / CrossFit</option>
-            <option value="strength">Strength / Power</option>
-            <option value="weight_loss">Performance + Fat Loss</option>
-          </select>
-          <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-        </div>
+        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Typical Training Level <span style="text-transform:none;opacity:.7">(sets your daily macro targets)</span></label>
+        <div class="relative"><select id="ob-level" onchange="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer"><option value="light">Light — easy / recovery days (×30 kcal/kg)</option><option value="moderate" selected>Moderate — standard training (×35 kcal/kg)</option><option value="hard">Hard — long runs / race-pace (×40 kcal/kg)</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div>
+        <div id="ob-targets-preview" class="mt-2 rounded-xl p-3 font-label text-[10px] text-primary uppercase tracking-wide" style="background:rgba(244,255,200,.08);outline:1px solid rgba(244,255,200,.15)">Enter your weight to preview targets</div>
       </div>
-      <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Activity Level</label>
-        <div class="relative">
-          <select id="ob-activity" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline appearance-none">
-            <option value="sedentary">Sedentary</option>
-            <option value="light">Light (1-2x/week)</option>
-            <option value="moderate" selected>Moderate (3-4x/week)</option>
-            <option value="active">Active (daily)</option>
-            <option value="very_active">Very Active (2x/day)</option>
-          </select>
-          <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-        </div>
-      </div>
-      <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Target Race / Event (optional)</label>
-        <input type="text" id="ob-race" placeholder="e.g. HYROX Munich, Berlin Marathon..."
-          class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline"/>
-      </div>
-      <button onclick="App.saveOnboarding()"
-        class="w-full py-4 bg-primary text-on-primary font-headline font-black uppercase tracking-[0.15em] rounded-xl active:scale-95 transition-all mt-2">
-        🚀 Start Fueling Smarter
-      </button>
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Target Race / Event <span style="text-transform:none">(optional)</span></label><input type="text" id="ob-race" placeholder="e.g. HYROX Munich, Berlin Marathon..." class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+      <button onclick="App.saveOnboarding()" class="w-full py-4 bg-primary text-on-primary font-headline font-black uppercase tracking-[0.15em] rounded-xl active:scale-95 transition-transform mt-2">🚀 Start Fueling Smarter</button>
     </div>
   </div>
 </div>
 
-<!-- ===== MODAL: LOG MEAL ===== -->
-<div class="modal-overlay" id="modal-meal">
+<!-- MEAL MODAL -->
+<div class="modal-overlay" id="modal-meal" onclick="if(event.target===this)App.closeMealModal()">
   <div class="modal-sheet">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Meal</h2>
-      <button onclick="App.closeMealModal()" class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90">
-        <span class="material-symbols-outlined text-sm">close</span>
-      </button>
-    </div>
+    <div class="sheet-handle"></div>
+    <div class="flex items-center justify-between mb-5"><h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Meal</h2><button onclick="App.closeMealModal()" aria-label="Close" class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">close</span></button></div>
     <div class="space-y-4">
-      <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Name</label>
-        <input type="text" id="meal-name" placeholder="e.g. Oat porridge with banana"
-          class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline"/>
-      </div>
-      <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Type</label>
-        <div class="relative">
-          <select id="meal-type" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm font-headline appearance-none">
-            <option value="breakfast">🌅 Breakfast</option>
-            <option value="lunch">☀️ Lunch</option>
-            <option value="dinner">🌙 Dinner</option>
-            <option value="snack">🍎 Snack</option>
-            <option value="pre_workout">⚡ Pre-Workout</option>
-            <option value="post_workout">💪 Post-Workout</option>
-          </select>
-          <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-        </div>
-      </div>
-      <!-- Macros block -->
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Name *</label><input type="text" id="meal-name" placeholder="e.g. Oat porridge with banana" autocomplete="off" onkeydown="if(event.key==='Enter')App.saveMeal()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Type</label><div class="relative"><select id="meal-type" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer"><option value="breakfast">🌅 Breakfast</option><option value="lunch">☀️ Lunch</option><option value="dinner">🌙 Dinner</option><option value="snack">🍎 Snack</option><option value="pre_workout">⚡ Pre-Workout</option><option value="post_workout">💪 Post-Workout</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
       <div class="bg-surface-container-lowest rounded-xl p-4 space-y-3">
-        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.15em]">Macros (estimate OK)</p>
+        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.15em]">Macros <span style="text-transform:none;opacity:.7">(estimate is fine)</span></p>
         <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1">Calories kcal</label>
-            <input type="number" id="meal-cal" placeholder="400" min="0"
-              class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-4 border-none text-sm font-headline"/>
-          </div>
-          <div>
-            <label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1">Carbs g</label>
-            <input type="number" id="meal-carbs" placeholder="60" min="0"
-              class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-4 border-none text-sm font-headline"/>
-          </div>
-          <div>
-            <label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1">Protein g</label>
-            <input type="number" id="meal-protein" placeholder="20" min="0"
-              class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-4 border-none text-sm font-headline"/>
-          </div>
-          <div>
-            <label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1">Fat g</label>
-            <input type="number" id="meal-fat" placeholder="10" min="0"
-              class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-4 border-none text-sm font-headline"/>
-          </div>
+          <div><label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1.5">Calories kcal</label><input type="number" id="meal-cal" placeholder="400" min="0" inputmode="numeric" class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-3 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+          <div><label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1.5">Carbs g</label><input type="number" id="meal-carbs" placeholder="60" min="0" inputmode="numeric" class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-3 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+          <div><label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1.5">Protein g</label><input type="number" id="meal-protein" placeholder="20" min="0" inputmode="numeric" class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-3 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+          <div><label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1.5">Fat g</label><input type="number" id="meal-fat" placeholder="10" min="0" inputmode="numeric" class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-3 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
         </div>
       </div>
-      <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Notes (optional)</label>
-        <input type="text" id="meal-notes" placeholder="e.g. post long run recovery"
-          class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm"/>
-      </div>
-      <div class="flex gap-3 pt-2">
-        <button onclick="App.closeMealModal()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-secondary-container text-on-secondary-container active:scale-95 transition-all">Cancel</button>
-        <button onclick="App.saveMeal()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-primary text-on-primary active:scale-95 transition-all">Save Meal</button>
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Notes <span style="text-transform:none">(optional)</span></label><input type="text" id="meal-notes" placeholder="e.g. post long run recovery" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm placeholder:text-on-surface-variant/50"/></div>
+      <div class="flex gap-3 pt-1">
+        <button onclick="App.closeMealModal()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-secondary-container text-on-secondary-container active:scale-95 transition-transform">Cancel</button>
+        <button onclick="App.saveMeal()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-primary text-on-primary active:scale-95 transition-transform">Save Meal</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== MODAL: LOG WORKOUT ===== -->
-<div class="modal-overlay" id="modal-workout">
+<!-- WORKOUT MODAL -->
+<div class="modal-overlay" id="modal-workout" onclick="if(event.target===this)App.closeWorkoutModal()">
   <div class="modal-sheet">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Workout</h2>
-      <button onclick="App.closeWorkoutModal()" class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90">
-        <span class="material-symbols-outlined text-sm">close</span>
-      </button>
-    </div>
+    <div class="sheet-handle"></div>
+    <div class="flex items-center justify-between mb-5"><h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Workout</h2><button onclick="App.closeWorkoutModal()" aria-label="Close" class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">close</span></button></div>
     <div class="space-y-4">
       <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Type</label>
-          <div class="relative">
-            <select id="wo-type" onchange="App.updateCalEstimate()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-4 border-none text-sm font-headline appearance-none">
-              <option value="run">🏃 Run</option>
-              <option value="bike">🚴 Bike</option>
-              <option value="swim">🏊 Swim</option>
-              <option value="hyrox">🏋️ HYROX</option>
-              <option value="strength">💪 Strength</option>
-              <option value="hiit">⚡ HIIT</option>
-              <option value="yoga">🧘 Yoga</option>
-              <option value="walk">🚶 Walk</option>
-              <option value="other">🏅 Other</option>
-            </select>
-            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span>
-          </div>
-        </div>
-        <div>
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Duration min</label>
-          <input type="number" id="wo-duration" placeholder="45" min="1" max="600" oninput="App.updateCalEstimate()"
-            class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-4 border-none text-sm font-headline"/>
-        </div>
-      </div>
-      <!-- Intensity -->
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Intensity</label>
-          <span class="font-headline font-bold text-primary text-sm" id="wo-intensity-val">5</span><span class="font-label text-[10px] text-on-surface-variant">/10</span>
-        </div>
-        <input type="range" min="1" max="10" value="5" id="wo-intensity"
-          oninput="document.getElementById('wo-intensity-val').textContent=this.value; App.updateCalEstimate()"
-          class="w-full accent-primary"/>
-        <div class="flex justify-between font-label text-[9px] text-on-surface-variant uppercase tracking-wider mt-1">
-          <span>Easy</span><span>Moderate</span><span>Max effort</span>
-        </div>
-      </div>
-      <!-- Calorie estimate -->
-      <div class="bg-primary/10 rounded-xl p-4 flex items-center gap-3" style="outline: 1px solid rgba(244,255,200,0.15)">
-        <div class="bg-primary text-on-primary w-9 h-9 rounded-full flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-sm">bolt</span>
-        </div>
-        <p class="font-headline font-bold text-primary text-sm" id="wo-cal-est">~— kcal estimated</p>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Activity Type</label><div class="relative"><select id="wo-type" onchange="App.updateCalEstimate()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-9 border-none text-sm font-headline appearance-none cursor-pointer"><option value="run">🏃 Run</option><option value="bike">🚴 Bike</option><option value="swim">🏊 Swim</option><option value="hyrox">🏋️ HYROX</option><option value="strength">💪 Strength</option><option value="hiit">⚡ HIIT</option><option value="yoga">🧘 Yoga</option><option value="walk">🚶 Walk</option><option value="other">🏅 Other</option></select><span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
+        <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Duration (min)</label><input type="number" id="wo-duration" placeholder="45" min="1" max="600" inputmode="numeric" oninput="App.updateCalEstimate()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
       </div>
       <div>
-        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Notes (optional)</label>
-        <input type="text" id="wo-notes" placeholder="e.g. 10km tempo, 4:45/km pace"
-          class="w-full bg-surface-container-highest text-on-surface rounded-xl py-4 px-5 border-none text-sm"/>
+        <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Training Level <span style="text-transform:none;opacity:.7">(drives today's macro targets)</span></label>
+        <div class="grid grid-cols-3 gap-2" id="wo-level-btns">
+          <button type="button" data-level="light" onclick="App.selectWoLevel('light')" class="wo-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Light</button>
+          <button type="button" data-level="moderate" onclick="App.selectWoLevel('moderate')" class="wo-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#f4ffc8;color:#536600">Moderate</button>
+          <button type="button" data-level="hard" onclick="App.selectWoLevel('hard')" class="wo-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Hard</button>
+        </div>
+        <input type="hidden" id="wo-intensity" value="moderate"/>
+        <p class="font-label text-[10px] text-on-surface-variant mt-2" id="wo-level-desc">Moderate effort — balanced targets for sustained performance</p>
       </div>
-      <div class="flex gap-3 pt-2">
-        <button onclick="App.closeWorkoutModal()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-secondary-container text-on-secondary-container active:scale-95 transition-all">Cancel</button>
-        <button onclick="App.saveWorkout()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-primary text-on-primary active:scale-95 transition-all">Save</button>
+      <div class="rounded-xl p-4 space-y-2" style="background:rgba(244,255,200,.08);outline:1px solid rgba(244,255,200,.15)">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-sm">bolt</span></div>
+          <p class="font-headline font-bold text-primary text-sm" id="wo-cal-est">~— kcal estimated</p>
+        </div>
+        <p class="font-label text-[10px] text-on-surface-variant pl-12" id="wo-macro-impact">Select level to see macro adjustment</p>
+      </div>
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Notes <span style="text-transform:none">(optional)</span></label><input type="text" id="wo-notes" placeholder="e.g. 10km tempo, 4:45/km pace" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm placeholder:text-on-surface-variant/50"/></div>
+      <div class="flex gap-3 pt-1">
+        <button onclick="App.closeWorkoutModal()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-secondary-container text-on-secondary-container active:scale-95 transition-transform">Cancel</button>
+        <button onclick="App.saveWorkout()" class="flex-1 py-4 font-headline font-bold uppercase tracking-wider text-sm rounded-xl bg-primary text-on-primary active:scale-95 transition-transform">Save</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
 <script>
-// ==================== DATA LAYER ====================
-const FS = {
-  KEYS: { profile: 'fs_profile', logs: 'fs_logs', workouts: 'fs_workouts' },
+// ═══════════════════════════════════════════════════════════════════════════
+//  FUELSYNC — CALCULATION ENGINE v2
+//  Spec: weight × multiplier calories | g/kg carbs | g/kg protein
+//  Training levels: Light / Moderate / Hard
+//  Goal: Marathon / HYROX / General Endurance
+// ═══════════════════════════════════════════════════════════════════════════
 
-  defaultProfile: () => ({
-    name: '', age: 25, weight: 75, height: 175, sex: 'male',
-    goal: 'endurance', activityBase: 'moderate', targetRace: '', onboarded: false,
+const ENGINE = {
+
+  // ── TRAINING LEVEL CONSTANTS (the core of the spec) ──────────────────────
+  // Calorie multiplier per kg bodyweight
+  calMult: { light: 30, moderate: 35, hard: 40 },
+
+  // Carbohydrate needs (g per kg bodyweight)
+  carbRange: {
+    light:    { min: 3, max: 5,  mid: 4   },
+    moderate: { min: 5, max: 7,  mid: 6   },
+    hard:     { min: 7, max: 10, mid: 8.5 },
+  },
+
+  // Protein needs (g per kg bodyweight)
+  protNeeds: {
+    general:   1.6,   // endurance / general
+    intense:   2.0,   // hard training / HYROX
+    strength:  2.2,   // strength focus
+  },
+
+  // Goal-specific protein category
+  protCategory: {
+    endurance:   'general',
+    hyrox:       'intense',
+    marathon:    'general',
+    general:     'general',
+    strength:    'strength',
+    weight_loss: 'intense',
+    hybrid:      'intense',
+  },
+
+  // ── DAILY TARGETS ────────────────────────────────────────────────────────
+  // Given: weight (kg), trainingLevel (light|moderate|hard), goal
+  // Returns: { cal, carbs, prot, fat, carbMin, carbMax, protG }
+  calcTargets(weight, trainingLevel, goal) {
+    const w = parseFloat(weight) || 75;
+    const lvl = trainingLevel || 'moderate';
+    const g = goal || 'endurance';
+
+    // Calories: weight × multiplier
+    const cal = Math.round(w * (this.calMult[lvl] || 35));
+
+    // Carbs: g/kg × weight (use midpoint for target, show range)
+    const cRange = this.carbRange[lvl] || this.carbRange.moderate;
+    const carbs = Math.round(w * cRange.mid);
+    const carbMin = Math.round(w * cRange.min);
+    const carbMax = Math.round(w * cRange.max);
+
+    // Protein: g/kg × weight
+    const pCat = this.protCategory[g] || 'general';
+    const protG = this.protNeeds[pCat] || 1.6;
+    const prot = Math.round(w * protG);
+
+    // Fat: fill remaining calories
+    const carbCal = carbs * 4;
+    const protCal = prot * 4;
+    const fatCal = Math.max(cal - carbCal - protCal, 0);
+    const fat = Math.round(fatCal / 9);
+
+    return { cal, carbs, prot, fat, carbMin, carbMax, protG, cRange, pCat, lvl };
+  },
+
+  // ── WORKOUT CALORIE ESTIMATE (MET-based) ─────────────────────────────────
+  // level: 'light' | 'moderate' | 'hard'
+  MET: {
+    run:      { light: 7,   moderate: 9.5, hard: 12  },
+    bike:     { light: 5.5, moderate: 8,   hard: 11  },
+    swim:     { light: 5,   moderate: 7,   hard: 9   },
+    hyrox:    { light: 7,   moderate: 10,  hard: 13  },
+    strength: { light: 3.5, moderate: 5,   hard: 7   },
+    hiit:     { light: 7,   moderate: 9,   hard: 12  },
+    yoga:     { light: 2.5, moderate: 3.5, hard: 4   },
+    walk:     { light: 3,   moderate: 4,   hard: 5   },
+    other:    { light: 4,   moderate: 6,   hard: 8   },
+  },
+
+  estWorkoutCal(type, durationMin, level, weightKg) {
+    const w = parseFloat(weightKg) || 75;
+    const mets = this.MET[type] || this.MET.other;
+    const met = mets[level] || mets.moderate;
+    return Math.round(met * w * (durationMin / 60));
+  },
+
+  // ── MACRO IMPACT DESCRIPTION ─────────────────────────────────────────────
+  macroImpact(level, goal, weight) {
+    const t = this.calcTargets(weight, level, goal);
+    const descs = {
+      light:    `Carb target: ${t.carbMin}–${t.carbMax}g (${t.cRange.min}–${t.cRange.max}g/kg) · Protein: ${t.prot}g`,
+      moderate: `Carb target: ${t.carbMin}–${t.carbMax}g (${t.cRange.min}–${t.cRange.max}g/kg) · Protein: ${t.prot}g`,
+      hard:     `Carb target: ${t.carbMin}–${t.carbMax}g (${t.cRange.min}–${t.cRange.max}g/kg) · Protein: ${t.prot}g`,
+    };
+    return descs[level] || descs.moderate;
+  },
+
+  // ── INSIGHTS ENGINE ──────────────────────────────────────────────────────
+  // Returns array of insight objects with priority ordering
+  generateInsights(profile, meals, workouts, targets, totals) {
+    const ins = [];
+    const w = profile.weight || 75;
+    const h = new Date().getHours();
+    const hasWo = workouts.length > 0;
+    const lvl = workouts.length > 0 ? (workouts[workouts.length-1].level || 'moderate') : (profile.activityBase || 'moderate');
+    const hiTraining = lvl === 'hard' || workouts.some(wo => wo.level === 'hard');
+    const isHyrox = profile.goal === 'hyrox' || profile.goal === 'hybrid';
+    const isMarathon = profile.goal === 'marathon' || profile.goal === 'endurance';
+
+    const calPct  = targets.cal   > 0 ? totals.cal   / targets.cal   : 0;
+    const carbPct = targets.carbs > 0 ? totals.carbs / targets.carbs : 0;
+    const protPct = targets.prot  > 0 ? totals.prot  / targets.prot  : 0;
+
+    const deficit = Math.round(targets.cal - totals.cal);
+    const carbGap = Math.round(targets.carbs - totals.carbs);
+
+    // 1. Critical: afternoon under-fueling
+    if (h >= 14 && calPct < 0.5)
+      ins.push({ t:'critical', i:'warning', title:'Under-fueling alert',
+        body:`Only ${Math.round(calPct*100)}% of daily calories by afternoon. You need ~${deficit} kcal more. Eat a balanced meal now.` });
+
+    // 2. Morning pre-session carb advice
+    if (!hasWo && h >= 6 && h < 11 && (isMarathon || isHyrox))
+      ins.push({ t:'info', i:'nutrition', title:'Pre-session carb load',
+        body:`Aim for ${Math.round(w*1)}–${Math.round(w*1.5)}g carbs 2–3h before your session (${Math.round(w)}–${Math.round(w*1.5)}g for your ${w}kg bodyweight).` });
+
+    // 3. Post-workout protein window
+    if (hasWo && protPct < 0.4)
+      ins.push({ t:'warning', i:'exercise', title:'Protein window open',
+        body:`You've trained but protein is only ${Math.round(totals.prot)}g of your ${targets.prot}g target (${targets.protG}g/kg). Get 30–40g in within 30 minutes.` });
+
+    // 4. Hard session carb replenishment
+    if (hiTraining && carbPct < 0.5)
+      ins.push({ t:'warning', i:'speed', title:'Glycogen depletion risk',
+        body:`Hard session detected but carbs at only ${Math.round(totals.carbs)}g of ${targets.carbs}g target. Add ${carbGap}g fast carbs (rice, banana, oats) to restore glycogen.` });
+
+    // 5. HYROX-specific dual fuel
+    if (isHyrox && hasWo && (carbPct < 0.6 || protPct < 0.6))
+      ins.push({ t:'warning', i:'fitness_center', title:'HYROX dual-fuel gap',
+        body:`HYROX demands both high carbs AND protein. Carbs: ${Math.round(totals.carbs)}/${targets.carbs}g · Protein: ${Math.round(totals.prot)}/${targets.prot}g. Don't sacrifice either.` });
+
+    // 6. Marathon long-run fuel
+    if (isMarathon && lvl === 'hard' && carbPct < 0.7)
+      ins.push({ t:'warning', i:'directions_run', title:'Long run fueling',
+        body:`Marathon training at hard effort requires ${targets.carbMin}–${targets.carbMax}g carbs (${targets.cRange.min}–${targets.cRange.max}g/kg). You're ${carbGap}g short.` });
+
+    // 7. On track — positive reinforcement
+    if (calPct >= 0.75 && calPct <= 1.1 && protPct >= 0.75 && carbPct >= 0.75)
+      ins.push({ t:'positive', i:'check_circle', title:'Dialled in',
+        body:`Calories, carbs & protein all on track today. Consistent fueling like this drives performance over weeks.` });
+
+    // 8. Calorie surplus
+    if (calPct > 1.15 && !hiTraining)
+      ins.push({ t:'warning', i:'monitoring', title:'Calorie surplus',
+        body:`At ${Math.round(totals.cal)} kcal vs ${targets.cal} target. Unless you have a hard session planned, consider lighter meals.` });
+
+    // 9. No meals logged yet
+    if (meals.length === 0)
+      ins.push({ t:'info', i:'add_circle', title:'Start logging',
+        body:`Log your first meal to unlock personalized fuel coaching based on your ${w}kg bodyweight and ${lvl} training day.` });
+
+    // 10. Race goal reminder
+    if (profile.targetRace)
+      ins.push({ t:'info', i:'sports_score', title:`Training for: ${profile.targetRace}`,
+        body:`Your daily targets are calculated for your bodyweight (${w}kg) and current training level. Consistency across weeks drives race-day performance.` });
+
+    return ins.slice(0, 4);
+  },
+
+  // ── WEEK SUMMARY ─────────────────────────────────────────────────────────
+  weekConsistency(weekData) {
+    const logged = weekData.filter(d => d.cal > 0).length;
+    const woDays = weekData.filter(d => d.hasWo).length;
+    const avgCal = logged > 0
+      ? Math.round(weekData.filter(d=>d.cal>0).reduce((s,d)=>s+d.cal,0)/logged)
+      : 0;
+    const avgProt = logged > 0
+      ? Math.round(weekData.filter(d=>d.prot>0).reduce((s,d)=>s+d.prot,0)/Math.max(weekData.filter(d=>d.prot>0).length,1))
+      : 0;
+    // Score: 50% logging, 30% workout days, 20% calorie hitting
+    const calHitDays = weekData.filter(d => d.cal > 0 && d.pct >= 0.8 && d.pct <= 1.15).length;
+    const score = Math.round((logged/7)*40 + (woDays/7)*30 + (calHitDays/7)*30);
+    return { logged, woDays, avgCal, avgProt, score };
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  DATA LAYER — localStorage persistence
+// ═══════════════════════════════════════════════════════════════════════════
+const FS = {
+  K: { p:'fs_profile', l:'fs_logs', w:'fs_workouts' },
+
+  defP: () => ({
+    name:'', age:25, weight:75, height:175, sex:'male',
+    goal:'endurance',          // endurance | marathon | hyrox | strength | weight_loss
+    trainingLevel:'moderate',  // light | moderate | hard  ← primary driver
+    activityBase:'moderate',   // kept for TDEE fallback
+    targetRace:'', onboarded:false,
   }),
 
-  getProfile() {
-    const raw = localStorage.getItem(this.KEYS.profile);
-    return raw ? { ...this.defaultProfile(), ...JSON.parse(raw) } : this.defaultProfile();
-  },
-  saveProfile(data) { localStorage.setItem(this.KEYS.profile, JSON.stringify(data)); },
+  getP()  { const r=localStorage.getItem(this.K.p); return r?{...this.defP(),...JSON.parse(r)}:this.defP(); },
+  saveP(d){ localStorage.setItem(this.K.p, JSON.stringify(d)); },
 
-  getLogs() { const r = localStorage.getItem(this.KEYS.logs); return r ? JSON.parse(r) : []; },
-  saveLogs(l) { localStorage.setItem(this.KEYS.logs, JSON.stringify(l)); },
-  addMeal(meal) {
-    const logs = this.getLogs();
-    meal.id = Date.now().toString(); meal.timestamp = new Date().toISOString();
-    logs.push(meal); this.saveLogs(logs); return meal;
-  },
-  deleteMeal(id) { this.saveLogs(this.getLogs().filter(l => l.id !== id)); },
-  getTodayMeals() { const t = new Date().toDateString(); return this.getLogs().filter(l => new Date(l.timestamp).toDateString() === t); },
-  getDateMeals(d) { return this.getLogs().filter(l => new Date(l.timestamp).toDateString() === d); },
+  getLogs()   { const r=localStorage.getItem(this.K.l); return r?JSON.parse(r):[]; },
+  saveLogs(l) { localStorage.setItem(this.K.l, JSON.stringify(l)); },
+  addMeal(m)  { const l=this.getLogs(); m.id=Date.now()+''; m.ts=new Date().toISOString(); l.push(m); this.saveLogs(l); return m; },
+  delMeal(id) { this.saveLogs(this.getLogs().filter(l=>l.id!==id)); },
+  dateMeals(d){ return this.getLogs().filter(l=>new Date(l.ts).toDateString()===d); },
+  todayMeals(){ return this.dateMeals(new Date().toDateString()); },
 
-  getWorkouts() { const r = localStorage.getItem(this.KEYS.workouts); return r ? JSON.parse(r) : []; },
-  saveWorkouts(w) { localStorage.setItem(this.KEYS.workouts, JSON.stringify(w)); },
-  addWorkout(w) {
-    const ws = this.getWorkouts();
-    w.id = Date.now().toString(); w.timestamp = new Date().toISOString();
-    ws.push(w); this.saveWorkouts(ws); return w;
-  },
-  deleteWorkout(id) { this.saveWorkouts(this.getWorkouts().filter(w => w.id !== id)); },
-  getTodayWorkouts() { const t = new Date().toDateString(); return this.getWorkouts().filter(w => new Date(w.timestamp).toDateString() === t); },
-  getDateWorkouts(d) { return this.getWorkouts().filter(w => new Date(w.timestamp).toDateString() === d); },
+  getWos()    { const r=localStorage.getItem(this.K.w); return r?JSON.parse(r):[]; },
+  saveWos(w)  { localStorage.setItem(this.K.w, JSON.stringify(w)); },
+  addWo(w)    { const ws=this.getWos(); w.id=Date.now()+''; w.ts=new Date().toISOString(); ws.push(w); this.saveWos(ws); return w; },
+  delWo(id)   { this.saveWos(this.getWos().filter(w=>w.id!==id)); },
+  dateWos(d)  { return this.getWos().filter(w=>new Date(w.ts).toDateString()===d); },
+  todayWos()  { return this.dateWos(new Date().toDateString()); },
 
-  calcBMR(p) {
-    return p.sex === 'female'
-      ? 10*p.weight + 6.25*p.height - 5*p.age - 161
-      : 10*p.weight + 6.25*p.height - 5*p.age + 5;
-  },
-  actMult: { sedentary:1.2, light:1.375, moderate:1.55, active:1.725, very_active:1.9 },
-  calcTDEE(p) { return Math.round(this.calcBMR(p) * (this.actMult[p.activityBase] || 1.55)); },
-
-  calcTargets(p, workouts) {
-    const tdee = this.calcTDEE(p);
-    const woCals = workouts.reduce((s, w) => s + (w.caloriesBurned || 0), 0);
-    const total = tdee + woCals;
-    const splits = {
-      endurance: [0.55,0.20,0.25], hybrid: [0.48,0.25,0.27],
-      strength: [0.40,0.30,0.30], weight_loss: [0.40,0.35,0.25],
-    };
-    const base = p.goal === 'weight_loss' ? total * 0.85 : total;
-    const [cP,prP,fP] = splits[p.goal] || splits.endurance;
-    return {
-      calories: Math.round(base),
-      carbs: Math.round((base * cP) / 4),
-      protein: Math.round((base * prP) / 4),
-      fat: Math.round((base * fP) / 9),
-    };
-  },
-
-  sumMacros(meals) {
-    return meals.reduce((a, m) => ({
-      calories: a.calories + (m.calories||0),
+  // Sum macros from meal array
+  sum(meals) {
+    return meals.reduce((a,m)=>({
+      cal:   a.cal   + (m.calories||0),
       carbs: a.carbs + (m.carbs||0),
-      protein: a.protein + (m.protein||0),
-      fat: a.fat + (m.fat||0),
-    }), { calories:0, carbs:0, protein:0, fat:0 });
+      prot:  a.prot  + (m.protein||0),
+      fat:   a.fat   + (m.fat||0),
+    }), {cal:0,carbs:0,prot:0,fat:0});
   },
 
-  estimateCalories(type, duration, intensity) {
-    const mets = { run:{l:7,m:9.5,h:12}, bike:{l:5.5,m:8,h:11}, swim:{l:5,m:7,h:9},
-      hyrox:{l:8,m:10,h:13}, strength:{l:3.5,m:5,h:7}, yoga:{l:2.5,m:3.5,h:4},
-      hiit:{l:7,m:9,h:12}, walk:{l:3,m:4,h:5}, other:{l:4,m:6,h:8} };
-    const p = this.getProfile();
-    const m = mets[type] || mets.other;
-    const met = intensity <= 3 ? m.l : intensity <= 6 ? m.m : m.h;
-    return Math.round(met * (p.weight||75) * (duration/60));
+  // Get targets for a specific date (uses workouts logged that day)
+  targetsForDate(dateStr) {
+    const p = this.getP();
+    const ws = this.dateWos(dateStr);
+    // Use the hardest training level of that day's workouts, or profile default
+    const lvl = ws.length > 0
+      ? (['hard','moderate','light'].find(l => ws.some(w=>w.level===l)) || p.trainingLevel)
+      : p.trainingLevel;
+    return ENGINE.calcTargets(p.weight, lvl, p.goal);
   },
 
-  generateInsights(profile, meals, workouts, targets) {
-    const insights = [];
-    const totals = this.sumMacros(meals);
-    const calPct = targets.calories > 0 ? totals.calories / targets.calories : 0;
-    const carbPct = targets.carbs > 0 ? totals.carbs / targets.carbs : 0;
-    const protPct = targets.protein > 0 ? totals.protein / targets.protein : 0;
-    const hour = new Date().getHours();
-    const hasWorkout = workouts.length > 0;
-    const highIntensity = workouts.some(w => w.intensity >= 7);
-
-    if (hour >= 14 && calPct < 0.5)
-      insights.push({ type:'critical', icon:'local_fire_department', title:'Under-fueling alert', body:`You're at ${Math.round(calPct*100)}% of your calorie target. Get a calorie-dense meal in now.` });
-    if (!hasWorkout && hour < 12 && (profile.goal==='endurance'||profile.goal==='hybrid'))
-      insights.push({ type:'info', icon:'nutrition', title:'Load up before your session', body:'Aim for 1–1.5g carbs/kg bodyweight 2–3h before your workout.' });
-    if (hasWorkout && protPct < 0.4)
-      insights.push({ type:'warning', icon:'exercise', title:'Protein window open', body:`You trained but protein is at ${Math.round(protPct*100)}% of target. Hit 30–40g now.` });
-    if (highIntensity && carbPct < 0.6)
-      insights.push({ type:'warning', icon:'speed', title:'Replenish glycogen', body:`High-intensity session detected. Carbs at ${Math.round(carbPct*100)}% — add fast carbs to restore glycogen.` });
-    if (calPct >= 0.7 && calPct <= 1.1 && protPct >= 0.7 && carbPct >= 0.7)
-      insights.push({ type:'positive', icon:'check_circle', title:"On track", body:'Nutrition is well-balanced today. Keep it consistent.' });
-    if (calPct > 1.2)
-      insights.push({ type:'warning', icon:'monitoring', title:'Calorie surplus', body:`At ${Math.round(calPct*100)}% of daily target. Consider lighter meals unless a long session is planned.` });
-    if (meals.length === 0)
-      insights.push({ type:'info', icon:'add_circle', title:'Start logging', body:'Log your first meal to get personalized fuel insights based on your training.' });
-    if (profile.targetRace)
-      insights.push({ type:'info', icon:'sports_score', title:`Training for: ${profile.targetRace}`, body:'Your targets are optimized for your race. Consistency over 2–3 weeks drives adaptation.' });
-
-    return insights.slice(0, 4);
-  },
-
-  getWeekData() {
+  // 7-day week data
+  weekData() {
     const days = [];
     for (let i = 6; i >= 0; i--) {
       const d = new Date(); d.setDate(d.getDate() - i);
       const ds = d.toDateString();
-      const meals = this.getDateMeals(ds);
-      const wos = this.getDateWorkouts(ds);
-      const p = this.getProfile();
-      const t = this.calcTargets(p, wos);
-      const totals = this.sumMacros(meals);
+      const meals = this.dateMeals(ds);
+      const ws = this.dateWos(ds);
+      const t = this.targetsForDate(ds);
+      const tot = this.sum(meals);
       days.push({
-        date: d, label: ['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()],
-        isToday: i===0, calories: totals.calories, target: t.calories,
-        hasWorkout: wos.length>0, pct: t.calories > 0 ? Math.min(totals.calories/t.calories,1) : 0,
+        date: d,
+        label: ['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()],
+        isToday: i===0,
+        cal: tot.cal, prot: tot.prot, carbs: tot.carbs,
+        tgt: t.cal, hasWo: ws.length>0,
+        level: ws.length>0 ? (ws.find(w=>w.level==='hard')?'hard':ws.find(w=>w.level==='moderate')?'moderate':'light') : null,
+        pct: t.cal>0 ? Math.min(tot.cal/t.cal, 1) : 0,
       });
     }
     return days;
   },
 };
 
-// ==================== APP CONTROLLER ====================
+// ═══════════════════════════════════════════════════════════════════════════
+//  APP CONTROLLER
+// ═══════════════════════════════════════════════════════════════════════════
 const App = {
-  currentPage: 'dashboard',
+  cur: 'dashboard',
+  _tt: null,
+  logDateOffset: 0,  // 0 = today, -1 = yesterday, etc.
 
   init() {
-    this.bindNav();
-    this.checkOnboarding();
-    this.renderDashboard();
-    this.updateDateDisplay();
-    this.setActiveNav('dashboard');
-  },
-
-  bindNav() {
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.addEventListener('click', () => this.navigate(btn.dataset.page));
+    document.querySelectorAll('.nav-btn,.sidebar-btn,.drawer-nav').forEach(b => {
+      b.addEventListener('click', () => this.navigate(b.dataset.page));
     });
+    document.getElementById('menu-btn').addEventListener('click', () => this.openDrawer());
+    document.getElementById('header-profile-btn').addEventListener('click', () => this.navigate('profile'));
+    if (!FS.getP().onboarded) setTimeout(() => document.getElementById('modal-onboarding').classList.add('open'), 350);
+    this.updateDate();
+    this.renderDashboard();
   },
 
   navigate(page) {
-    this.currentPage = page;
-    document.querySelectorAll('.page').forEach(p =>
-      p.classList.toggle('active', p.id === `page-${page}`)
-    );
-    this.setActiveNav(page);
-    if (page === 'dashboard') this.renderDashboard();
-    if (page === 'training') this.renderTraining();
-    if (page === 'fuel') this.renderFuel();
-    if (page === 'profile') this.renderProfilePage();
+    if (!page) return;
+    this.cur = page;
+    this.closeDrawer();
+    document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id===`page-${page}`));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page===page));
+    ({ dashboard:()=>this.renderDashboard(), training:()=>this.renderTraining(), fuel:()=>this.renderFuel(), profile:()=>this.renderProfile() })[page]?.();
+    window.scrollTo(0, 0);
   },
 
-  setActiveNav(page) {
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      const isActive = btn.dataset.page === page;
-      btn.classList.toggle('text-[#D1FF00]', isActive);
-      btn.classList.toggle('bg-surface-container-highest', isActive);
-      btn.classList.toggle('nav-active', isActive);
-      btn.classList.toggle('text-on-surface-variant', !isActive);
-      btn.classList.toggle('rounded-xl', isActive);
-    });
-  },
+  openDrawer()  { document.getElementById('drawer-overlay').classList.add('open'); },
+  closeDrawer() { document.getElementById('drawer-overlay').classList.remove('open'); },
 
-  updateDateDisplay() {
+  updateDate() {
     const now = new Date();
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -1043,187 +819,511 @@ const App = {
     if (el) el.textContent = `${days[now.getDay()].toUpperCase()} ${now.getDate()} ${months[now.getMonth()].toUpperCase()}`;
   },
 
-  checkOnboarding() {
-    const p = FS.getProfile();
-    if (!p.onboarded) setTimeout(() => this.openOnboarding(), 400);
-  },
-
   toast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2500);
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(this._tt);
+    this._tt = setTimeout(() => t.classList.remove('show'), 2600);
   },
 
-  // ---- Onboarding ----
-  openOnboarding() { document.getElementById('modal-onboarding').classList.add('open'); },
-  closeOnboarding() { document.getElementById('modal-onboarding').classList.remove('open'); },
-  saveOnboarding() {
-    const p = FS.getProfile();
-    p.name = document.getElementById('ob-name').value.trim() || 'Athlete';
-    p.sex = document.getElementById('ob-sex').value;
-    p.age = parseInt(document.getElementById('ob-age').value) || 25;
-    p.weight = parseFloat(document.getElementById('ob-weight').value) || 75;
-    p.height = parseInt(document.getElementById('ob-height').value) || 175;
-    p.goal = document.getElementById('ob-goal').value;
-    p.activityBase = document.getElementById('ob-activity').value;
-    p.targetRace = document.getElementById('ob-race').value.trim();
-    p.onboarded = true;
-    FS.saveProfile(p);
-    this.closeOnboarding();
-    this.toast('⚡ Profile locked in — let\'s go!');
+  setText(id, v) { const e=document.getElementById(id); if(e) e.textContent=v; },
+
+  setPct(id, pct) {
+    const e = document.getElementById(id); if (!e) return;
+    const c = Math.min(Math.max(pct, 0), 100);
+    e.style.width = c + '%';
+    e.classList.toggle('glow', c > 3);
+  },
+
+  // ── DASHBOARD ─────────────────────────────────────────────────────────────
+  renderDashboard() {
+    const p = FS.getP();
+    const meals = FS.todayMeals();
+    const ws = FS.todayWos();
+    // Use hardest workout level of the day, else profile default
+    const lvl = ws.length > 0
+      ? (['hard','moderate','light'].find(l => ws.some(w => w.level===l)) || p.trainingLevel)
+      : p.trainingLevel;
+    const tgt = ENGINE.calcTargets(p.weight, lvl, p.goal);
+    const tot = FS.sum(meals);
+
+    const h = new Date().getHours();
+    const gr = h<5?'Night Owl':h<12?'Morning':h<17?'Afternoon':'Evening';
+    this.setText('dash-greeting', `${gr}, ${(p.name||'Athlete').split(' ')[0]}.`);
+    this.setText('dash-hero-cal', Math.round(tot.cal));
+    this.setText('dash-hero-target', `of ${tgt.cal} kcal`);
+    this.setPct('dash-cal-bar', (tot.cal/(tgt.cal||1))*100);
+
+    this.setText('dash-carbs-val', Math.round(tot.carbs));
+    this.setText('dash-carbs-tgt', `/ ${tgt.carbs}g`);
+    this.setPct('bar-carbs', (tot.carbs/(tgt.carbs||1))*100);
+
+    this.setText('dash-prot-val', Math.round(tot.prot));
+    this.setText('dash-prot-tgt', `/ ${tgt.prot}g`);
+    this.setPct('bar-prot', (tot.prot/(tgt.prot||1))*100);
+
+    this.setText('dash-fat-val', Math.round(tot.fat));
+    this.setText('dash-fat-tgt', `/ ${tgt.fat}g`);
+    this.setPct('bar-fat', (tot.fat/(tgt.fat||1))*100);
+
+    this.setText('dash-meal-count', meals.length);
+    this.setText('dash-wo-count', ws.length);
+    this.setText('dash-burned', ws.reduce((s,w)=>s+(w.cal||0),0));
+
+    // Training level badge on dashboard
+    const lvlEl = document.getElementById('dash-training-level');
+    if (lvlEl) {
+      const lvlCols = { light:'rgba(59,232,176,.1)', moderate:'rgba(244,255,200,.1)', hard:'rgba(255,115,81,.1)' };
+      const lvlTxt  = { light:'#3be8b0', moderate:'#f4ffc8', hard:'#ff7351' };
+      lvlEl.textContent = lvl.charAt(0).toUpperCase()+lvl.slice(1)+' day';
+      lvlEl.style.background = lvlCols[lvl]||lvlCols.moderate;
+      lvlEl.style.color = lvlTxt[lvl]||lvlTxt.moderate;
+    }
+
+    // Carb range label
+    const cRangeEl = document.getElementById('dash-carb-range');
+    if (cRangeEl) cRangeEl.textContent = `${tgt.carbMin}–${tgt.carbMax}g target range`;
+
+    this.renderWeekChart('dash-week-chart', 'dash-week-labels');
+
+    const insights = ENGINE.generateInsights(p, meals, ws, tgt, tot);
+    document.getElementById('dash-insights').innerHTML = insights.slice(0,2).map(i=>this.insightHTML(i)).join('');
+  },
+
+  // ── TRAINING (LOG) ────────────────────────────────────────────────────────
+  logDateStr() {
+    const d = new Date();
+    d.setDate(d.getDate() + this.logDateOffset);
+    return d.toDateString();
+  },
+
+  shiftLogDate(delta) {
+    const next = this.logDateOffset + delta;
+    if (next > 0) return; // can't go into the future
+    this.logDateOffset = next;
+    this.renderTraining();
+  },
+
+  renderTraining() {
+    const ds = this.logDateStr();
+    const d = new Date(ds);
+    const isToday = this.logDateOffset === 0;
+    const isYesterday = this.logDateOffset === -1;
+
+    // Date label
+    const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const monNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    this.setText('log-date-label',
+      isToday ? 'Today' : isYesterday ? 'Yesterday' : dayNames[d.getDay()]);
+    this.setText('log-date-sub',
+      isToday ? new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+              : d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}));
+
+    // Disable next-day button if already at today
+    const nextBtn = document.getElementById('log-date-next');
+    if (nextBtn) {
+      nextBtn.disabled = isToday;
+      nextBtn.style.opacity = isToday ? '0.3' : '1';
+    }
+
+    // Add meal/workout buttons — only for today (can still delete past entries)
+    const logActions = document.querySelectorAll('[data-today-only]');
+    logActions.forEach(el => el.style.display = isToday ? '' : 'none');
+
+    const meals = FS.dateMeals(ds);
+    const ws    = FS.dateWos(ds);
+    const p     = FS.getP();
+    const lvl   = ws.length > 0
+      ? (['hard','moderate','light'].find(l => ws.some(w=>w.level===l)) || p.trainingLevel)
+      : p.trainingLevel;
+    const tgt = ENGINE.calcTargets(p.weight, lvl, p.goal);
+    const tot = FS.sum(meals);
+
+    // Day summary strip
+    const summEl = document.getElementById('log-day-summary');
+    if (summEl && (meals.length > 0 || ws.length > 0)) {
+      const calPct = tgt.cal>0 ? Math.min((tot.cal/tgt.cal)*100,100) : 0;
+      const carbPct= tgt.carbs>0 ? Math.min((tot.carbs/tgt.carbs)*100,100) : 0;
+      const protPct= tgt.prot>0 ? Math.min((tot.prot/tgt.prot)*100,100) : 0;
+      summEl.innerHTML = [
+        { label:'Calories', val:`${Math.round(tot.cal)} / ${tgt.cal}`, sub:'kcal', pct:calPct, col:'#f4ffc8' },
+        { label:'Carbs',    val:`${Math.round(tot.carbs)} / ${tgt.carbs}`, sub:`g (${tgt.carbMin}–${tgt.carbMax}g)`, pct:carbPct, col:'#f4ffc8' },
+        { label:'Protein',  val:`${Math.round(tot.prot)} / ${tgt.prot}`, sub:`g (${tgt.protG}g/kg)`, pct:protPct, col:'#ff7351' },
+      ].map(s => `
+        <div class="bg-surface-container rounded-xl p-3">
+          <p class="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mb-1">${s.label}</p>
+          <p class="font-headline font-bold text-sm">${s.val}</p>
+          <p class="font-label text-[9px] text-on-surface-variant mt-0.5">${s.sub}</p>
+          <div class="progress-track h-1 bg-surface-container-highest rounded-full mt-2">
+            <div class="progress-fill rounded-full transition-all duration-700" style="width:${s.pct}%;background:${s.col}"></div>
+          </div>
+        </div>`).join('');
+    } else if (summEl) {
+      summEl.innerHTML = '';
+    }
+
+    // Meals list
+    const mEl = document.getElementById('log-meals-list');
+    mEl.innerHTML = meals.length
+      ? meals.map(m => this.mealHTML(m, isToday)).join('')
+      : this.emptyHTML('restaurant', 'No meals logged', isToday ? 'Tap + to log your first meal' : 'No meals on this day');
+
+    // Workouts list
+    const wEl = document.getElementById('log-workouts-list');
+    wEl.innerHTML = ws.length
+      ? ws.map(w => this.woHTML(w, isToday)).join('')
+      : this.emptyHTML('fitness_center', 'No sessions logged', isToday ? 'Log training to adjust fuel targets' : 'No training on this day');
+  },
+
+  // ── FUEL / INSIGHTS ───────────────────────────────────────────────────────
+  renderFuel() {
+    const p = FS.getP();
+    const meals = FS.todayMeals();
+    const ws = FS.todayWos();
+    const lvl = ws.length > 0
+      ? (['hard','moderate','light'].find(l => ws.some(w=>w.level===l)) || p.trainingLevel)
+      : p.trainingLevel;
+    const tgt = ENGINE.calcTargets(p.weight, lvl, p.goal);
+    const tot = FS.sum(meals);
+
+    // Today's insights
+    const insights = ENGINE.generateInsights(p, meals, ws, tgt, tot);
+    document.getElementById('insights-list').innerHTML = insights.map(i => this.insightHTML(i)).join('');
+
+    // Macro breakdown card
+    const mbEl = document.getElementById('fuel-macro-breakdown');
+    if (mbEl) {
+      mbEl.innerHTML = `
+        <div class="space-y-3">
+          ${[
+            { label:'Daily Calories', formula:`${p.weight}kg × ${ENGINE.calMult[lvl]} kcal/kg`, result:`${tgt.cal} kcal`, note:`${lvl.charAt(0).toUpperCase()+lvl.slice(1)} training day`, col:'#f4ffc8' },
+            { label:'Carbohydrates', formula:`${tgt.cRange.min}–${tgt.cRange.max}g/kg × ${p.weight}kg`, result:`${tgt.carbMin}–${tgt.carbMax}g`, note:`Target: ${tgt.carbs}g/day`, col:'#f4ffc8' },
+            { label:'Protein',       formula:`${tgt.protG}g/kg × ${p.weight}kg`, result:`${tgt.prot}g`, note:`${tgt.pCat==='intense'?'Intense/HYROX':tgt.pCat==='strength'?'Strength':'General endurance'} protocol`, col:'#ff7351' },
+            { label:'Fat',           formula:`Remaining calories ÷ 9`, result:`${tgt.fat}g`, note:`~${Math.round(tgt.fat*9)} kcal from fat`, col:'#ffeeab' },
+          ].map(r=>`
+            <div class="flex items-start justify-between gap-4 py-3" style="border-bottom:1px solid rgba(72,72,71,.15)">
+              <div class="min-w-0">
+                <p class="font-headline font-bold text-sm" style="color:${r.col}">${r.label}</p>
+                <p class="font-label text-[10px] text-on-surface-variant mt-0.5 uppercase tracking-wide">${r.formula}</p>
+                <p class="font-label text-[10px] text-on-surface-variant/60 mt-0.5">${r.note}</p>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="font-headline font-bold text-lg" style="color:${r.col}">${r.result}</p>
+              </div>
+            </div>`).join('')}
+        </div>`;
+    }
+
+    // Goal-specific tip
+    const tips = {
+      endurance:   { t:'info', i:'directions_run', title:'Endurance Protocol', body:`Your targets use ${tgt.cRange.min}–${tgt.cRange.max}g carbs/kg and ${tgt.protG}g protein/kg. On long run days (hard), carbs should hit ${tgt.carbMax}g minimum.` },
+      marathon:    { t:'info', i:'directions_run', title:'Marathon Protocol',  body:`Carb-load 2–3 days before long runs: aim for ${tgt.carbMax}g/day. Race week: increase to 10g/kg. Protein at ${tgt.prot}g maintains muscle.` },
+      hyrox:       { t:'info', i:'fitness_center', title:'HYROX Protocol',    body:`HYROX demands dual fueling: ${tgt.prot}g protein/day for muscle (${tgt.protG}g/kg) AND ${tgt.carbs}g carbs for endurance energy. Never compromise either.` },
+      hybrid:      { t:'info', i:'fitness_center', title:'Hybrid Protocol',   body:`HYROX demands dual fueling: ${tgt.prot}g protein/day (${tgt.protG}g/kg) AND ${tgt.carbs}g carbs. Never compromise either.` },
+      strength:    { t:'info', i:'exercise',       title:'Strength Protocol', body:`At ${tgt.protG}g/kg protein, your target is ${tgt.prot}g/day. Time 30–40g around training. Carbs (${tgt.carbs}g) fuel performance, not just protein.` },
+      weight_loss: { t:'info', i:'monitoring',     title:'Performance Cut',   body:`${tgt.cal} kcal maintains performance while creating a mild deficit. Protein at ${tgt.prot}g (${tgt.protG}g/kg) protects muscle. Never cut carbs below ${tgt.carbMin}g.` },
+      general:     { t:'info', i:'self_improvement',title:'General Endurance', body:`Your targets use ${tgt.cRange.min}–${tgt.cRange.max}g carbs/kg and ${tgt.protG}g protein/kg for your ${lvl} training days.` },
+    };
+    document.getElementById('goal-tip').innerHTML = this.insightHTML(tips[p.goal]||tips.general);
+
+    // 7-day stats
+    const week = FS.weekData();
+    const stats = ENGINE.weekConsistency(week);
+    this.setText('week-days-logged', stats.logged);
+    this.setText('week-avg-cal', stats.avgCal || '—');
+    this.setText('week-workout-days', stats.woDays);
+    this.setText('consistency-score', stats.score);
+    this.setPct('consistency-bar', stats.score);
+
+    this.renderWeekChart('insights-week-chart', 'insights-week-labels');
+  },
+
+  // ── PROFILE ───────────────────────────────────────────────────────────────
+  renderProfile() {
+    const p = FS.getP();
+    document.getElementById('prof-name').value    = p.name    || '';
+    document.getElementById('prof-age').value     = p.age     || '';
+    document.getElementById('prof-weight').value  = p.weight  || '';
+    document.getElementById('prof-height').value  = p.height  || '';
+    document.getElementById('prof-sex').value     = p.sex     || 'male';
+    document.getElementById('prof-goal').value    = p.goal    || 'endurance';
+    document.getElementById('prof-activity').value= p.activityBase || 'moderate';
+    document.getElementById('prof-race').value    = p.targetRace || '';
+
+    // Training level selector
+    this.selectProfLevel(p.trainingLevel || 'moderate', false);
+
+    this.setText('prof-display-name', (p.name||'Athlete').toUpperCase());
+    const goalLabels = { endurance:'Endurance Athlete', marathon:'Marathon Runner', hyrox:'HYROX Athlete', hybrid:'HYROX Hybrid', strength:'Strength Athlete', weight_loss:'Performance Cut', general:'General Endurance' };
+    this.setText('prof-display-goal', goalLabels[p.goal]||'Set your goal');
+
+    const tgt = ENGINE.calcTargets(p.weight, p.trainingLevel||'moderate', p.goal);
+    this.setText('prof-tdee-display', `${tgt.cal} KCAL / DAY`);
+    this.setText('prof-macro-display', `C: ${tgt.carbMin}–${tgt.carbMax}g · P: ${tgt.prot}g (${tgt.protG}g/kg) · F: ${tgt.fat}g`);
+  },
+
+  selectProfLevel(level, save=true) {
+    document.querySelectorAll('.prof-level-btn').forEach(b => {
+      const active = b.dataset.level === level;
+      b.style.background = active ? '#f4ffc8' : '#262626';
+      b.style.color      = active ? '#536600' : '#adaaaa';
+    });
+    if (save) {
+      const p = FS.getP(); p.trainingLevel = level; FS.saveP(p);
+      this.renderProfile(); this.renderDashboard();
+      this.toast(`Training level set to ${level}`);
+    }
+  },
+
+  saveProfile() {
+    const p = FS.getP();
+    p.name          = document.getElementById('prof-name').value.trim() || 'Athlete';
+    p.age           = parseInt(document.getElementById('prof-age').value) || 25;
+    p.sex           = document.getElementById('prof-sex').value;
+    p.weight        = parseFloat(document.getElementById('prof-weight').value) || 75;
+    p.height        = parseInt(document.getElementById('prof-height').value) || 175;
+    p.goal          = document.getElementById('prof-goal').value;
+    p.activityBase  = document.getElementById('prof-activity').value;
+    p.targetRace    = document.getElementById('prof-race').value.trim();
+    p.onboarded     = true;
+    FS.saveP(p);
+    this.toast('✓ Profile updated');
+    this.renderProfile();
     this.renderDashboard();
   },
 
-  // ---- Dashboard ----
-  renderDashboard() {
-    const p = FS.getProfile();
-    const meals = FS.getTodayMeals();
-    const wos = FS.getTodayWorkouts();
-    const targets = FS.calcTargets(p, wos);
-    const totals = FS.sumMacros(meals);
+  clearAllData()  { if(confirm('Clear ALL data? Cannot be undone.')){ localStorage.clear(); location.reload(); } },
 
-    const hour = new Date().getHours();
-    const greet = hour < 5 ? 'Night Owl' : hour < 12 ? 'Morning' : hour < 17 ? 'Afternoon' : 'Evening';
-    const first = p.name ? p.name.split(' ')[0] : 'Athlete';
-    document.getElementById('dash-greeting').textContent = `${greet}, ${first}.`;
-
-    // Hero cal
-    document.getElementById('dash-hero-cal').textContent = Math.round(totals.calories);
-    document.getElementById('dash-hero-target').textContent = `of ${Math.round(targets.calories)} kcal`;
-
-    const calPct = Math.min((totals.calories / (targets.calories||1)) * 100, 100);
-    document.getElementById('dash-cal-bar').style.width = `${calPct}%`;
-
-    // Macros
-    this._setMacro('dash-carbs-val','dash-carbs-tgt','bar-carbs', totals.carbs, targets.carbs);
-    this._setMacro('dash-prot-val','dash-prot-tgt','bar-prot', totals.protein, targets.protein);
-    this._setMacro('dash-fat-val','dash-fat-tgt','bar-fat', totals.fat, targets.fat);
-
-    // Bento
-    document.getElementById('dash-meal-count').textContent = meals.length;
-    document.getElementById('dash-wo-count').textContent = wos.length;
-    document.getElementById('dash-burned').textContent = wos.reduce((s,w) => s+(w.caloriesBurned||0), 0);
-
-    // Week chart
-    this.renderWeekChart('dash-week-chart', 'dash-week-labels');
-
-    // Insights
-    const insights = FS.generateInsights(p, meals, wos, targets);
-    document.getElementById('dash-insights').innerHTML = insights.slice(0,2).map(i => this.insightHTML(i)).join('');
+  toggleMetric(btn) {
+    const on = btn.getAttribute('aria-pressed')==='true';
+    btn.setAttribute('aria-pressed', String(!on));
+    btn.style.background = on ? '#45474c' : '#f4ffc8';
+    document.getElementById('metric-thumb').style.marginLeft = on ? '0' : 'auto';
+    this.toast(on ? 'Imperial units (coming soon)' : 'Metric units active');
   },
 
-  _setMacro(valId, tgtId, barId, val, target) {
-    const vEl = document.getElementById(valId);
-    const tEl = document.getElementById(tgtId);
-    const bEl = document.getElementById(barId);
-    if (vEl) {
-      // Keep the inner span, only update text node
-      const span = vEl.querySelector('span');
-      vEl.childNodes[0].textContent = Math.round(val);
-      if (tEl) tEl.textContent = `/ ${target}g`;
-    }
-    if (bEl) bEl.style.width = `${Math.min((val/(target||1))*100,100)}%`;
+  // ── ONBOARDING ────────────────────────────────────────────────────────────
+  saveOnboarding() {
+    const p = FS.getP();
+    p.name          = document.getElementById('ob-name').value.trim()           || 'Athlete';
+    p.sex           = document.getElementById('ob-sex').value;
+    p.age           = parseInt(document.getElementById('ob-age').value)          || 25;
+    p.weight        = parseFloat(document.getElementById('ob-weight').value)     || 75;
+    p.height        = parseInt(document.getElementById('ob-height').value)       || 175;
+    p.goal          = document.getElementById('ob-goal').value;
+    p.trainingLevel = document.getElementById('ob-level').value;
+    p.activityBase  = document.getElementById('ob-level').value; // sync
+    p.targetRace    = document.getElementById('ob-race').value.trim();
+    p.trainingLevel = document.getElementById('ob-level').value;
+    p.activityBase  = p.trainingLevel;
+    p.onboarded     = true;
+    FS.saveP(p);
+    document.getElementById('modal-onboarding').classList.remove('open');
+    const tgt = ENGINE.calcTargets(p.weight, p.trainingLevel, p.goal);
+    this.toast(`⚡ Targets set: ${tgt.cal} kcal · ${tgt.carbs}g carbs · ${tgt.prot}g protein`);
+    this.renderDashboard();
   },
 
-  renderWeekChart(chartId, labelsId) {
-    const week = FS.getWeekData();
-    const chart = document.getElementById(chartId);
-    const labels = document.getElementById(labelsId);
-    if (!chart) return;
-    chart.innerHTML = week.map(d => `
-      <div class="flex-1 flex flex-col items-center gap-1 h-full">
-        <div class="flex-1 w-full rounded-sm relative overflow-hidden" style="background:#262626">
-          <div class="absolute bottom-0 inset-x-0 rounded-sm transition-all duration-700"
-               style="height:${Math.round(d.pct*100)}%;background:${d.hasWorkout ? 'linear-gradient(180deg,#ff7351,#ff4500)' : 'linear-gradient(180deg,#f4ffc8,#cffc00)'}"></div>
-        </div>
-      </div>
-    `).join('');
-    if (labels) labels.innerHTML = week.map(d =>
-      `<span class="${d.isToday ? 'text-primary' : ''}">${d.label}</span>`
-    ).join('');
+  // ── ONBOARDING LIVE PREVIEW ──────────────────────────────────────────────
+  updateObTargets() {
+    const w  = parseFloat(document.getElementById('ob-weight')?.value) || 0;
+    const lvl = document.getElementById('ob-level')?.value || 'moderate';
+    const goal = document.getElementById('ob-goal')?.value || 'endurance';
+    const el = document.getElementById('ob-targets-preview');
+    if (!el) return;
+    if (!w) { el.textContent = 'Enter weight to preview your targets'; return; }
+    const tgt = ENGINE.calcTargets(w, lvl, goal);
+    el.textContent = `${tgt.cal} kcal · Carbs ${tgt.carbMin}–${tgt.carbMax}g · Protein ${tgt.prot}g (${tgt.protG}g/kg)`;
   },
 
-  insightHTML(i) {
-    const colors = {
-      positive: { bg:'rgba(244,255,200,0.08)', border:'rgba(244,255,200,0.2)', icon:'text-primary', iconBg:'bg-primary/20' },
-      warning:  { bg:'rgba(255,176,32,0.08)', border:'rgba(255,176,32,0.2)', icon:'text-tertiary', iconBg:'bg-tertiary/20' },
-      critical: { bg:'rgba(255,115,81,0.08)', border:'rgba(255,115,81,0.2)', icon:'text-error', iconBg:'bg-error/20' },
-      info:     { bg:'rgba(244,255,200,0.05)', border:'rgba(244,255,200,0.1)', icon:'text-on-surface-variant', iconBg:'bg-surface-container-highest' },
+  // ── MEAL MODAL ────────────────────────────────────────────────────────────
+  openMealModal()  { document.getElementById('modal-meal').classList.add('open'); setTimeout(()=>document.getElementById('meal-name')?.focus(),350); },
+  closeMealModal() {
+    document.getElementById('modal-meal').classList.remove('open');
+    ['meal-name','meal-cal','meal-carbs','meal-protein','meal-fat','meal-notes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+    document.getElementById('meal-type').value='breakfast';
+  },
+  saveMeal() {
+    const name = document.getElementById('meal-name').value.trim();
+    if (!name) { this.toast('⚠ Add a meal name'); return; }
+    FS.addMeal({
+      name,
+      mealType: document.getElementById('meal-type').value,
+      calories: parseInt(document.getElementById('meal-cal').value)    || 0,
+      carbs:    parseInt(document.getElementById('meal-carbs').value)   || 0,
+      protein:  parseInt(document.getElementById('meal-protein').value) || 0,
+      fat:      parseInt(document.getElementById('meal-fat').value)     || 0,
+      notes:    document.getElementById('meal-notes').value.trim(),
+    });
+    this.closeMealModal();
+    this.toast('✓ Meal logged');
+    this.renderDashboard();
+    if (this.cur==='training') this.renderTraining();
+  },
+
+  // ── WORKOUT MODAL ─────────────────────────────────────────────────────────
+  _woLevel: 'moderate',
+
+  openWorkoutModal() {
+    this._woLevel = 'moderate';
+    document.getElementById('modal-workout').classList.add('open');
+    this.selectWoLevel('moderate');
+  },
+
+  closeWorkoutModal() {
+    document.getElementById('modal-workout').classList.remove('open');
+    document.getElementById('wo-duration').value = '';
+    document.getElementById('wo-notes').value = '';
+    document.getElementById('wo-type').value = 'run';
+    this._woLevel = 'moderate';
+    this.selectWoLevel('moderate');
+  },
+
+  selectWoLevel(level) {
+    this._woLevel = level;
+    document.querySelectorAll('.wo-level-btn').forEach(b => {
+      const active = b.dataset.level === level;
+      b.style.background = active ? '#f4ffc8' : (b.dataset.level==='light'?'#262626':'#1a1a1a');
+      b.style.color      = active ? '#536600' : '#adaaaa';
+      b.style.outline    = active ? 'none' : 'none';
+    });
+    const descs = {
+      light:    'Easy/recovery day — lower calorie & carb targets · Good for active recovery',
+      moderate: 'Standard training day — balanced fuel targets for sustained performance',
+      hard:     'Race pace / long session — maximum carb & calorie targets for full glycogen',
     };
-    const c = colors[i.type] || colors.info;
-    return `<div class="rounded-xl p-4 flex items-start gap-4" style="background:${c.bg};outline:1px solid ${c.border}">
-      <div class="w-9 h-9 rounded-full ${c.iconBg} flex items-center justify-center shrink-0 mt-0.5">
-        <span class="material-symbols-outlined text-sm ${c.icon}">${i.icon}</span>
+    this.setText('wo-level-desc', descs[level] || descs.moderate);
+    this.updateCalEstimate();
+  },
+
+  updateCalEstimate() {
+    const type  = document.getElementById('wo-type')?.value     || 'run';
+    const dur   = parseInt(document.getElementById('wo-duration')?.value) || 30;
+    const level = this._woLevel || 'moderate';
+    const p     = FS.getP();
+    const cal   = ENGINE.estWorkoutCal(type, dur, level, p.weight);
+    this.setText('wo-cal-est', `~${cal} kcal estimated`);
+    this.setText('wo-macro-impact', ENGINE.macroImpact(level, p.goal, p.weight));
+  },
+
+  saveWorkout() {
+    const dur = parseInt(document.getElementById('wo-duration').value);
+    if (!dur || dur < 1) { this.toast('⚠ Enter duration in minutes'); return; }
+    const type  = document.getElementById('wo-type').value;
+    const level = this._woLevel || 'moderate';
+    const p     = FS.getP();
+    const cal   = ENGINE.estWorkoutCal(type, dur, level, p.weight);
+    FS.addWo({ type, duration:dur, level, notes:document.getElementById('wo-notes').value.trim(), cal });
+    this.closeWorkoutModal();
+    this.toast(`✓ ${level.charAt(0).toUpperCase()+level.slice(1)} workout logged — targets updated`);
+    this.renderDashboard();
+    if (this.cur==='training') this.renderTraining();
+  },
+
+  deleteMeal(id) {
+    FS.delMeal(id);
+    this.toast('Meal removed');
+    this.renderDashboard();
+    if (this.cur==='training') this.renderTraining();
+  },
+  deleteWorkout(id) {
+    FS.delWo(id);
+    this.toast('Workout removed');
+    this.renderDashboard();
+    if (this.cur==='training') this.renderTraining();
+  },
+
+  // ── WEEK CHART ────────────────────────────────────────────────────────────
+  renderWeekChart(cId, lId) {
+    const week = FS.weekData();
+    const c = document.getElementById(cId);
+    const l = document.getElementById(lId);
+    if (!c) return;
+    const lvlColors = { hard:'linear-gradient(180deg,#ff7351,#c0340d)', moderate:'linear-gradient(180deg,#f4ffc8,#cffc00)', light:'linear-gradient(180deg,#3be8b0,#00b37d)', null:'linear-gradient(180deg,#f4ffc8,#cffc00)' };
+    c.innerHTML = week.map(d => `
+      <div class="flex-1 flex flex-col h-full">
+        <div class="flex-1 relative rounded-sm" style="background:#262626;min-height:4px">
+          <div class="absolute bottom-0 inset-x-0 rounded-sm transition-all duration-700"
+               style="height:${d.cal>0?Math.max(Math.round(d.pct*100),4):0}%;
+                      background:${lvlColors[d.level]||lvlColors.null};
+                      ${d.isToday?'box-shadow:0 0 6px rgba(244,255,200,.3)':''}">
+          </div>
+        </div>
+      </div>`).join('');
+    if (l) l.innerHTML = week.map(d =>
+      `<span class="${d.isToday?'text-primary font-bold':''}">${d.label}</span>`).join('');
+  },
+
+  // ── RENDER HELPERS ────────────────────────────────────────────────────────
+  insightHTML(ins) {
+    const cfg = {
+      positive: { bg:'rgba(244,255,200,.07)', bdr:'rgba(244,255,200,.18)', ic:'text-primary',          ib:'rgba(244,255,200,.12)' },
+      warning:  { bg:'rgba(255,238,171,.07)', bdr:'rgba(255,176,32,.2)',   ic:'text-tertiary',         ib:'rgba(255,176,32,.12)'  },
+      critical: { bg:'rgba(255,115,81,.08)',  bdr:'rgba(255,115,81,.25)',  ic:'text-error',            ib:'rgba(255,115,81,.14)'  },
+      info:     { bg:'rgba(255,255,255,.03)', bdr:'rgba(72,72,71,.3)',     ic:'text-on-surface-variant',ib:'rgba(72,72,71,.3)'    },
+    };
+    const c = cfg[ins.t] || cfg.info;
+    return `<div class="rounded-xl p-4 flex items-start gap-3" style="background:${c.bg};outline:1px solid ${c.bdr}">
+      <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5" style="background:${c.ib}">
+        <span class="material-symbols-outlined text-sm ${c.ic}">${ins.i}</span>
       </div>
       <div class="flex-1 min-w-0">
-        <p class="font-headline font-bold text-sm">${i.title}</p>
-        <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">${i.body}</p>
+        <p class="font-headline font-bold text-sm">${ins.title}</p>
+        <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">${ins.body}</p>
       </div>
     </div>`;
   },
 
-  // ---- Training ----
-  renderTraining() {
-    const meals = FS.getTodayMeals();
-    const wos = FS.getTodayWorkouts();
-
-    const mEl = document.getElementById('log-meals-list');
-    mEl.innerHTML = meals.length === 0
-      ? this.emptyHTML('restaurant', 'No meals logged', 'Tap + to log your first meal')
-      : meals.map(m => this.mealItemHTML(m)).join('');
-
-    const wEl = document.getElementById('log-workouts-list');
-    wEl.innerHTML = wos.length === 0
-      ? this.emptyHTML('fitness_center', 'No sessions logged', 'Log your training to adjust fuel targets')
-      : wos.map(w => this.workoutItemHTML(w)).join('');
-  },
-
-  mealItemHTML(m) {
+  mealHTML(m, canDelete=true) {
     const icons = { breakfast:'light_mode', lunch:'wb_sunny', dinner:'bedtime', snack:'nutrition', pre_workout:'bolt', post_workout:'exercise' };
-    const icon = icons[m.mealType] || 'restaurant';
-    return `<div class="bg-surface-container-highest rounded-2xl p-4 flex items-center gap-4">
-      <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+    const icon  = icons[m.mealType] || 'restaurant';
+    const time  = new Date(m.ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    const delBtn = canDelete
+      ? `<button onclick="App.deleteMeal('${m.id}')" aria-label="Delete" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-transform shrink-0"><span class="material-symbols-outlined text-error" style="font-size:16px">close</span></button>`
+      : '';
+    return `<div class="bg-surface-container-highest rounded-2xl p-4 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(244,255,200,.08)">
         <span class="material-symbols-outlined text-primary text-sm">${icon}</span>
       </div>
       <div class="flex-1 min-w-0">
-        <p class="font-headline font-bold text-sm truncate">${m.name}</p>
-        <p class="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">${m.mealType.replace('_',' ')} · ${this.fmtTime(m.timestamp)}</p>
+        <p class="font-headline font-bold text-sm truncate">${this.esc(m.name)}</p>
+        <p class="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">${m.mealType.replace('_',' ')} · ${time}</p>
       </div>
-      <div class="text-right mr-3 shrink-0">
-        <p class="font-headline font-bold text-sm text-primary">${m.calories}</p>
+      <div class="text-right shrink-0 mr-1">
+        <p class="font-headline font-bold text-sm text-primary">${m.calories||'—'}</p>
         <p class="text-[9px] text-on-surface-variant uppercase">kcal</p>
       </div>
-      <button onclick="App.deleteMeal('${m.id}')" class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-all shrink-0">
-        <span class="material-symbols-outlined text-error text-xs">close</span>
-      </button>
+      ${delBtn}
     </div>`;
   },
 
-  workoutItemHTML(w, showDelete = false) {
+  woHTML(w, canDelete=true) {
     const icons = { run:'directions_run', bike:'directions_bike', swim:'pool', hyrox:'fitness_center', strength:'exercise', hiit:'bolt', yoga:'self_improvement', walk:'directions_walk', other:'sports' };
-    const icon = icons[w.type] || 'sports';
-    const deleteBtn = `<button onclick="App.deleteWorkout('${w.id}')" class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-all shrink-0">
-      <span class="material-symbols-outlined text-error text-xs">close</span>
-    </button>`;
-    return `<div class="bg-surface-container rounded-2xl p-4 flex items-center gap-4">
-      <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(255,115,81,0.1)">
+    const icon  = icons[w.type] || 'sports';
+    const time  = new Date(w.ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    const lvlCols = { light:'#3be8b0', moderate:'#f4ffc8', hard:'#ff7351' };
+    const lvlCol  = lvlCols[w.level] || '#f4ffc8';
+    const delBtn  = canDelete
+      ? `<button onclick="App.deleteWorkout('${w.id}')" aria-label="Delete" class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center active:scale-90 transition-transform shrink-0"><span class="material-symbols-outlined text-error" style="font-size:16px">close</span></button>`
+      : '';
+    return `<div class="bg-surface-container rounded-2xl p-4 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:rgba(255,115,81,.1)">
         <span class="material-symbols-outlined text-error text-sm">${icon}</span>
       </div>
       <div class="flex-1 min-w-0">
-        <p class="font-headline font-bold text-sm capitalize">${w.type}${w.notes ? ' · ' + w.notes : ''}</p>
-        <p class="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">${w.duration}min · Intensity ${w.intensity}/10 · ${this.fmtTime(w.timestamp)}</p>
+        <p class="font-headline font-bold text-sm capitalize">${this.esc(w.type)}${w.notes?' · '+this.esc(w.notes):''}</p>
+        <p class="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">${w.duration}min · <span style="color:${lvlCol}">${(w.level||'moderate').toUpperCase()}</span> · ${time}</p>
       </div>
-      <div class="text-right mr-3 shrink-0">
-        <p class="font-headline font-bold text-sm" style="color:#ff7351">${w.caloriesBurned}</p>
+      <div class="text-right shrink-0 mr-1">
+        <p class="font-headline font-bold text-sm" style="color:#ff7351">${w.cal}</p>
         <p class="text-[9px] text-on-surface-variant uppercase">kcal</p>
       </div>
-      ${deleteBtn}
+      ${delBtn}
     </div>`;
   },
 
   emptyHTML(icon, title, sub) {
-    return `<div class="flex flex-col items-center justify-center py-10 text-center">
+    return `<div class="flex flex-col items-center py-10 text-center">
       <div class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center mb-4">
         <span class="material-symbols-outlined text-on-surface-variant">${icon}</span>
       </div>
@@ -1232,141 +1332,7 @@ const App = {
     </div>`;
   },
 
-  deleteMeal(id) { FS.deleteMeal(id); this.toast('Meal removed'); this.renderTraining(); if(this.currentPage==='dashboard') this.renderDashboard(); },
-  deleteWorkout(id) { FS.deleteWorkout(id); this.toast('Workout removed'); this.renderTraining(); if(this.currentPage==='dashboard') this.renderDashboard(); },
-
-  // ---- Fuel/Insights ----
-  renderFuel() {
-    const p = FS.getProfile();
-    const meals = FS.getTodayMeals();
-    const wos = FS.getTodayWorkouts();
-    const targets = FS.calcTargets(p, wos);
-    const insights = FS.generateInsights(p, meals, wos, targets);
-
-    document.getElementById('insights-list').innerHTML = insights.map(i => this.insightHTML(i)).join('');
-
-    const tips = {
-      endurance: { icon:'directions_run', title:'Endurance Tip', body:'Aim for 7–10g carbs/kg on long run days. Never skip post-session protein within 30 minutes.', type:'info' },
-      hybrid: { icon:'fitness_center', title:'HYROX Tip', body:'Hybrid training demands high carbs AND protein. Your engine needs both — never sacrifice one.', type:'info' },
-      strength: { icon:'exercise', title:'Strength Tip', body:'Target 1.6–2.2g protein/kg daily. Time carbs around training for performance and recovery.', type:'info' },
-      weight_loss: { icon:'monitoring', title:'Fat Loss Tip', body:'Preserve muscle by keeping protein high. A 300–500 kcal deficit is enough — don\'t over-restrict.', type:'info' },
-    };
-    document.getElementById('goal-tip').innerHTML = this.insightHTML(tips[p.goal] || tips.endurance);
-
-    const week = FS.getWeekData();
-    const logged = week.filter(d => d.calories > 0).length;
-    const avgCal = logged > 0 ? Math.round(week.filter(d=>d.calories>0).reduce((s,d)=>s+d.calories,0)/logged) : 0;
-    const woDays = week.filter(d => d.hasWorkout).length;
-
-    document.getElementById('week-days-logged').textContent = logged;
-    document.getElementById('week-avg-cal').textContent = avgCal || '—';
-    document.getElementById('week-workout-days').textContent = woDays;
-
-    const score = Math.round((logged/7)*50 + (woDays/7)*30 + (avgCal>0?20:0));
-    document.getElementById('consistency-score').textContent = score;
-    document.getElementById('consistency-bar').style.width = `${score}%`;
-
-    this.renderWeekChart('insights-week-chart', 'insights-week-labels');
-  },
-
-  // ---- Profile ----
-  renderProfilePage() {
-    const p = FS.getProfile();
-    document.getElementById('prof-name').value = p.name || '';
-    document.getElementById('prof-age').value = p.age || '';
-    document.getElementById('prof-sex').value = p.sex || 'male';
-    document.getElementById('prof-weight').value = p.weight || '';
-    document.getElementById('prof-height').value = p.height || '';
-    document.getElementById('prof-goal').value = p.goal || 'endurance';
-    document.getElementById('prof-activity').value = p.activityBase || 'moderate';
-    document.getElementById('prof-race').value = p.targetRace || '';
-
-    const displayName = p.name ? p.name.toUpperCase() : 'ATHLETE';
-    document.getElementById('prof-display-name').textContent = displayName;
-
-    const goalLabels = { endurance:'Endurance Athlete', hybrid:'HYROX Hybrid', strength:'Strength Athlete', weight_loss:'Performance + Fat Loss' };
-    document.getElementById('prof-display-goal').textContent = goalLabels[p.goal] || 'Set your goal';
-
-    const targets = FS.calcTargets(p, []);
-    document.getElementById('prof-tdee-display').textContent = `${targets.calories} KCAL TARGET`;
-    document.getElementById('prof-macro-display').textContent = `C: ${targets.carbs}g · P: ${targets.protein}g · F: ${targets.fat}g`;
-  },
-
-  saveProfile() {
-    const p = FS.getProfile();
-    p.name = document.getElementById('prof-name').value.trim() || 'Athlete';
-    p.age = parseInt(document.getElementById('prof-age').value) || 25;
-    p.sex = document.getElementById('prof-sex').value;
-    p.weight = parseFloat(document.getElementById('prof-weight').value) || 75;
-    p.height = parseInt(document.getElementById('prof-height').value) || 175;
-    p.goal = document.getElementById('prof-goal').value;
-    p.activityBase = document.getElementById('prof-activity').value;
-    p.targetRace = document.getElementById('prof-race').value.trim();
-    p.onboarded = true;
-    FS.saveProfile(p);
-    this.toast('✓ Profile updated');
-    this.renderProfilePage();
-    this.renderDashboard();
-  },
-
-  clearAllData() {
-    if (confirm('Terminate session? This clears ALL data.')) {
-      localStorage.clear(); location.reload();
-    }
-  },
-
-  // ---- Meal Modal ----
-  openMealModal() { document.getElementById('modal-meal').classList.add('open'); setTimeout(()=>document.getElementById('meal-name').focus(),300); },
-  closeMealModal() { document.getElementById('modal-meal').classList.remove('open'); document.getElementById('meal-name').value=''; ['meal-cal','meal-carbs','meal-protein','meal-fat','meal-notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; }); },
-
-  saveMeal() {
-    const name = document.getElementById('meal-name').value.trim();
-    if (!name) { this.toast('⚠ Add a meal name'); return; }
-    FS.addMeal({
-      name,
-      mealType: document.getElementById('meal-type').value,
-      calories: parseInt(document.getElementById('meal-cal').value) || 0,
-      carbs: parseInt(document.getElementById('meal-carbs').value) || 0,
-      protein: parseInt(document.getElementById('meal-protein').value) || 0,
-      fat: parseInt(document.getElementById('meal-fat').value) || 0,
-      notes: document.getElementById('meal-notes').value.trim(),
-    });
-    this.closeMealModal();
-    this.toast('✓ Meal logged');
-    if (this.currentPage === 'training') this.renderTraining();
-    this.renderDashboard();
-  },
-
-  // ---- Workout Modal ----
-  openWorkoutModal() { document.getElementById('modal-workout').classList.add('open'); this.updateCalEstimate(); },
-  closeWorkoutModal() { document.getElementById('modal-workout').classList.remove('open'); document.getElementById('wo-duration').value=''; document.getElementById('wo-notes').value=''; document.getElementById('wo-intensity').value=5; document.getElementById('wo-intensity-val').textContent='5'; },
-
-  updateCalEstimate() {
-    const type = document.getElementById('wo-type').value;
-    const duration = parseInt(document.getElementById('wo-duration').value) || 30;
-    const intensity = parseInt(document.getElementById('wo-intensity').value) || 5;
-    document.getElementById('wo-cal-est').textContent = `~${FS.estimateCalories(type, duration, intensity)} kcal estimated`;
-  },
-
-  saveWorkout() {
-    const duration = parseInt(document.getElementById('wo-duration').value);
-    if (!duration || duration < 1) { this.toast('⚠ Add duration'); return; }
-    const type = document.getElementById('wo-type').value;
-    const intensity = parseInt(document.getElementById('wo-intensity').value) || 5;
-    FS.addWorkout({
-      type, duration, intensity,
-      notes: document.getElementById('wo-notes').value.trim(),
-      caloriesBurned: FS.estimateCalories(type, duration, intensity),
-    });
-    this.closeWorkoutModal();
-    this.toast('✓ Workout logged');
-    if (this.currentPage === 'training') this.renderTraining();
-    this.renderDashboard();
-  },
-
-  fmtTime(iso) {
-    return new Date(iso).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
-  },
+  esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); },
 };
 
 document.addEventListener('DOMContentLoaded', () => App.init());
