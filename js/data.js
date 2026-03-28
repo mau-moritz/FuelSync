@@ -1,309 +1,80 @@
-// ===========================
-// FUELSYNC — DATA LAYER
-// All stored in localStorage
-// ===========================
+/* FuelSync — Data Layer (localStorage)
+ * Depends on: engine.js
+ */
 
+//  DATA LAYER — localStorage persistence
+// ═══════════════════════════════════════════════════════════════════════════
 const FS = {
+  K: { p:'fs_profile', l:'fs_logs', w:'fs_workouts' },
 
-  // ---- KEYS ----
-  KEYS: {
-    profile: 'fs_profile',
-    logs: 'fs_logs',         // array of meal logs
-    workouts: 'fs_workouts', // array of workout logs
-  },
-
-  // ---- DEFAULTS ----
-  defaultProfile: () => ({
-    name: '',
-    age: 25,
-    weight: 75,    // kg
-    height: 175,   // cm
-    sex: 'male',
-    goal: 'endurance',   // endurance | strength | hybrid | weight_loss
-    activityBase: 'moderate', // sedentary | light | moderate | active | very_active
-    targetRace: '',
-    onboarded: false,
+  defP: () => ({
+    name:'', age:25, weight:75, height:175, sex:'male',
+    goal:'endurance',          // endurance | marathon | hyrox | strength | weight_loss
+    trainingLevel:'moderate',  // light | moderate | hard  ← primary driver
+    activityBase:'moderate',   // kept for TDEE fallback
+    targetRace:'', onboarded:false,
   }),
 
-  // ---- PROFILE ----
-  getProfile() {
-    const raw = localStorage.getItem(this.KEYS.profile);
-    return raw ? { ...this.defaultProfile(), ...JSON.parse(raw) } : this.defaultProfile();
+  getP()  { const r=localStorage.getItem(this.K.p); return r?{...this.defP(),...JSON.parse(r)}:this.defP(); },
+  saveP(d){ localStorage.setItem(this.K.p, JSON.stringify(d)); },
+
+  getLogs()   { const r=localStorage.getItem(this.K.l); return r?JSON.parse(r):[]; },
+  saveLogs(l) { localStorage.setItem(this.K.l, JSON.stringify(l)); },
+  addMeal(m)  { const l=this.getLogs(); m.id=Date.now()+''; m.ts=new Date().toISOString(); l.push(m); this.saveLogs(l); return m; },
+  delMeal(id) { this.saveLogs(this.getLogs().filter(l=>l.id!==id)); },
+  dateMeals(d){ return this.getLogs().filter(l=>new Date(l.ts).toDateString()===d); },
+  todayMeals(){ return this.dateMeals(new Date().toDateString()); },
+
+  getWos()    { const r=localStorage.getItem(this.K.w); return r?JSON.parse(r):[]; },
+  saveWos(w)  { localStorage.setItem(this.K.w, JSON.stringify(w)); },
+  addWo(w)    { const ws=this.getWos(); w.id=Date.now()+''; w.ts=new Date().toISOString(); ws.push(w); this.saveWos(ws); return w; },
+  delWo(id)   { this.saveWos(this.getWos().filter(w=>w.id!==id)); },
+  dateWos(d)  { return this.getWos().filter(w=>new Date(w.ts).toDateString()===d); },
+  todayWos()  { return this.dateWos(new Date().toDateString()); },
+
+  // Sum macros from meal array
+  sum(meals) {
+    return meals.reduce((a,m)=>({
+      cal:   a.cal   + (m.calories||0),
+      carbs: a.carbs + (m.carbs||0),
+      prot:  a.prot  + (m.protein||0),
+      fat:   a.fat   + (m.fat||0),
+    }), {cal:0,carbs:0,prot:0,fat:0});
   },
 
-  saveProfile(data) {
-    localStorage.setItem(this.KEYS.profile, JSON.stringify(data));
+  // Get targets for a specific date (uses workouts logged that day)
+  targetsForDate(dateStr) {
+    const p = this.getP();
+    const ws = this.dateWos(dateStr);
+    // Use the hardest training level of that day's workouts, or profile default
+    const lvl = ws.length > 0
+      ? (['hard','moderate','light'].find(l => ws.some(w=>w.level===l)) || p.trainingLevel)
+      : p.trainingLevel;
+    return ENGINE.calcTargets(p.weight, lvl, p.goal);
   },
 
-  // ---- MEAL LOGS ----
-  getLogs() {
-    const raw = localStorage.getItem(this.KEYS.logs);
-    return raw ? JSON.parse(raw) : [];
-  },
-
-  saveLogs(logs) {
-    localStorage.setItem(this.KEYS.logs, JSON.stringify(logs));
-  },
-
-  addMeal(meal) {
-    const logs = this.getLogs();
-    meal.id = Date.now().toString();
-    meal.timestamp = new Date().toISOString();
-    logs.push(meal);
-    this.saveLogs(logs);
-    return meal;
-  },
-
-  deleteMeal(id) {
-    const logs = this.getLogs().filter(l => l.id !== id);
-    this.saveLogs(logs);
-  },
-
-  getTodayMeals() {
-    const today = new Date().toDateString();
-    return this.getLogs().filter(l => new Date(l.timestamp).toDateString() === today);
-  },
-
-  getDateMeals(dateStr) {
-    return this.getLogs().filter(l => new Date(l.timestamp).toDateString() === dateStr);
-  },
-
-  // ---- WORKOUTS ----
-  getWorkouts() {
-    const raw = localStorage.getItem(this.KEYS.workouts);
-    return raw ? JSON.parse(raw) : [];
-  },
-
-  saveWorkouts(workouts) {
-    localStorage.setItem(this.KEYS.workouts, JSON.stringify(workouts));
-  },
-
-  addWorkout(workout) {
-    const workouts = this.getWorkouts();
-    workout.id = Date.now().toString();
-    workout.timestamp = new Date().toISOString();
-    workouts.push(workout);
-    this.saveWorkouts(workouts);
-    return workout;
-  },
-
-  deleteWorkout(id) {
-    const workouts = this.getWorkouts().filter(w => w.id !== id);
-    this.saveWorkouts(workouts);
-  },
-
-  getTodayWorkouts() {
-    const today = new Date().toDateString();
-    return this.getWorkouts().filter(w => new Date(w.timestamp).toDateString() === today);
-  },
-
-  getDateWorkouts(dateStr) {
-    return this.getWorkouts().filter(w => new Date(w.timestamp).toDateString() === dateStr);
-  },
-
-  // ---- CALCULATIONS ----
-  calcBMR(profile) {
-    const { weight, height, age, sex } = profile;
-    if (sex === 'female') {
-      return 10 * weight + 6.25 * height - 5 * age - 161;
-    }
-    return 10 * weight + 6.25 * height - 5 * age + 5;
-  },
-
-  activityMultipliers: {
-    sedentary: 1.2,
-    light: 1.375,
-    moderate: 1.55,
-    active: 1.725,
-    very_active: 1.9,
-  },
-
-  calcTDEE(profile) {
-    const bmr = this.calcBMR(profile);
-    return Math.round(bmr * (this.activityMultipliers[profile.activityBase] || 1.55));
-  },
-
-  calcTargets(profile, workouts) {
-    const tdee = this.calcTDEE(profile);
-    // Add workout calories
-    const workoutCals = workouts.reduce((sum, w) => sum + (w.caloriesBurned || 0), 0);
-    const totalNeeds = tdee + workoutCals;
-
-    // Macro splits based on goal
-    let carbPct, protPct, fatPct;
-    switch (profile.goal) {
-      case 'endurance':
-        carbPct = 0.55; protPct = 0.20; fatPct = 0.25; break;
-      case 'strength':
-        carbPct = 0.40; protPct = 0.30; fatPct = 0.30; break;
-      case 'hybrid':
-        carbPct = 0.48; protPct = 0.25; fatPct = 0.27; break;
-      case 'weight_loss':
-        carbPct = 0.40; protPct = 0.35; fatPct = 0.25;
-        return {
-          calories: Math.round(totalNeeds * 0.85),
-          carbs: Math.round((totalNeeds * 0.85 * carbPct) / 4),
-          protein: Math.round((totalNeeds * 0.85 * protPct) / 4),
-          fat: Math.round((totalNeeds * 0.85 * fatPct) / 9),
-        };
-      default:
-        carbPct = 0.48; protPct = 0.25; fatPct = 0.27;
-    }
-
-    return {
-      calories: totalNeeds,
-      carbs: Math.round((totalNeeds * carbPct) / 4),
-      protein: Math.round((totalNeeds * protPct) / 4),
-      fat: Math.round((totalNeeds * fatPct) / 9),
-    };
-  },
-
-  sumMacros(meals) {
-    return meals.reduce((acc, m) => ({
-      calories: acc.calories + (m.calories || 0),
-      carbs: acc.carbs + (m.carbs || 0),
-      protein: acc.protein + (m.protein || 0),
-      fat: acc.fat + (m.fat || 0),
-    }), { calories: 0, carbs: 0, protein: 0, fat: 0 });
-  },
-
-  // Estimate workout calories burned
-  estimateCalories(type, duration, intensity) {
-    // MET-based estimation
-    const metMap = {
-      run: { low: 7, mod: 9.5, high: 12 },
-      bike: { low: 5.5, mod: 8, high: 11 },
-      swim: { low: 5, mod: 7, high: 9 },
-      hyrox: { low: 8, mod: 10, high: 13 },
-      strength: { low: 3.5, mod: 5, high: 7 },
-      yoga: { low: 2.5, mod: 3.5, high: 4 },
-      hiit: { low: 7, mod: 9, high: 12 },
-      walk: { low: 3, mod: 4, high: 5 },
-      other: { low: 4, mod: 6, high: 8 },
-    };
-    const profile = this.getProfile();
-    const weight = profile.weight || 75;
-    const mets = metMap[type] || metMap.other;
-    const met = intensity <= 3 ? mets.low : intensity <= 6 ? mets.mod : mets.high;
-    return Math.round(met * weight * (duration / 60));
-  },
-
-  // ---- INSIGHTS ENGINE ----
-  generateInsights(profile, todayMeals, todayWorkouts, targets) {
-    const insights = [];
-    const totals = this.sumMacros(todayMeals);
-    const calPct = targets.calories > 0 ? totals.calories / targets.calories : 0;
-    const carbPct = targets.carbs > 0 ? totals.carbs / targets.carbs : 0;
-    const protPct = targets.protein > 0 ? totals.protein / targets.protein : 0;
-    const hour = new Date().getHours();
-    const hasWorkout = todayWorkouts.length > 0;
-    const highIntensity = todayWorkouts.some(w => w.intensity >= 7);
-
-    // Under-fueling
-    if (hour >= 14 && calPct < 0.5) {
-      insights.push({
-        type: 'critical',
-        icon: '⚡',
-        title: 'Under-fueling alert',
-        body: `You've only hit ${Math.round(calPct * 100)}% of your calorie target and it's already afternoon. Prioritize a calorie-dense meal or snack now.`,
-      });
-    }
-
-    // Pre-workout carbs
-    if (!hasWorkout && hour < 12 && (profile.goal === 'endurance' || profile.goal === 'hybrid')) {
-      insights.push({
-        type: 'info',
-        icon: '🍌',
-        title: 'Load up before your session',
-        body: 'For endurance performance, aim for 1–1.5g carbs per kg bodyweight 2–3 hours before your workout.',
-      });
-    }
-
-    // Post-workout protein
-    if (hasWorkout && protPct < 0.4) {
-      insights.push({
-        type: 'warning',
-        icon: '🥩',
-        title: 'Protein window open',
-        body: `You trained today but protein intake is at ${Math.round(protPct * 100)}% of target. Get 30–40g of protein in to support recovery.`,
-      });
-    }
-
-    // High intensity — carb top-up
-    if (highIntensity && carbPct < 0.6) {
-      insights.push({
-        type: 'warning',
-        icon: '🔥',
-        title: 'Replenish glycogen',
-        body: `High-intensity session detected. Your carb intake (${Math.round(carbPct * 100)}%) is low — add fast carbs to restore glycogen stores.`,
-      });
-    }
-
-    // On track
-    if (calPct >= 0.7 && calPct <= 1.1 && protPct >= 0.7 && carbPct >= 0.7) {
-      insights.push({
-        type: 'positive',
-        icon: '✅',
-        title: "You're on track",
-        body: 'Nutrition is well-balanced today. Keep it consistent through the rest of the day.',
-      });
-    }
-
-    // Overeating
-    if (calPct > 1.2) {
-      insights.push({
-        type: 'warning',
-        icon: '📊',
-        title: 'Calorie surplus',
-        body: `You're at ${Math.round(calPct * 100)}% of your daily target. Unless you have a long session planned, consider lighter meals for the rest of the day.`,
-      });
-    }
-
-    // No meals logged
-    if (todayMeals.length === 0) {
-      insights.push({
-        type: 'info',
-        icon: '📝',
-        title: 'Start logging',
-        body: 'Log your first meal today to get personalized fuel insights based on your training.',
-      });
-    }
-
-    // Race goal
-    if (profile.targetRace) {
-      insights.push({
-        type: 'info',
-        icon: '🏁',
-        title: `Training for: ${profile.targetRace}`,
-        body: 'Your nutrition targets are optimized for your race goal. Consistency over 2–3 weeks is what drives adaptation.',
-      });
-    }
-
-    return insights.slice(0, 4); // max 4 insights
-  },
-
-  // Week summary (last 7 days)
-  getWeekData() {
+  // 7-day week data
+  weekData() {
     const days = [];
     for (let i = 6; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const dateStr = d.toDateString();
-      const meals = this.getDateMeals(dateStr);
-      const workouts = this.getDateWorkouts(dateStr);
-      const profile = this.getProfile();
-      const targets = this.calcTargets(profile, workouts);
-      const totals = this.sumMacros(meals);
+      const d = new Date(); d.setDate(d.getDate() - i);
+      const ds = d.toDateString();
+      const meals = this.dateMeals(ds);
+      const ws = this.dateWos(ds);
+      const t = this.targetsForDate(ds);
+      const tot = this.sum(meals);
       days.push({
         date: d,
-        label: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][d.getDay()],
-        isToday: i === 0,
-        calories: totals.calories,
-        target: targets.calories,
-        hasWorkout: workouts.length > 0,
-        pct: targets.calories > 0 ? Math.min(totals.calories / targets.calories, 1) : 0,
+        label: ['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()],
+        isToday: i===0,
+        cal: tot.cal, prot: tot.prot, carbs: tot.carbs,
+        tgt: t.cal, hasWo: ws.length>0,
+        level: ws.length>0 ? (ws.find(w=>w.level==='hard')?'hard':ws.find(w=>w.level==='moderate')?'moderate':'light') : null,
+        pct: t.cal>0 ? Math.min(tot.cal/t.cal, 1) : 0,
       });
     }
     return days;
   },
 };
+
+// ═══════════════════════════════════════════════════════════════════════════
