@@ -32,7 +32,7 @@
     }},
   }
 </script>
-  <link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body class="bg-surface text-on-surface font-body" style="min-height:100dvh">
 <div id="app-shell">
@@ -40,12 +40,12 @@
 <!-- TOP BAR -->
 <header id="top-bar" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-5 h-16 bg-[#0e0e0e]/80 backdrop-blur-xl" style="border-bottom:1px solid rgba(72,72,71,.15)">
   <div class="flex items-center gap-4">
-    <button id="menu-btn" class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-surface-container transition-colors active:scale-90 transition-transform" aria-label="Open menu">
+    <button id="menu-btn" class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-surface-container transition-colors active:scale-90" aria-label="Open menu">
       <span class="material-symbols-outlined text-[#D1FF00]">menu</span>
     </button>
     <h1 class="font-headline font-black uppercase tracking-widest text-xl text-[#D1FF00] select-none">FUELSYNC</h1>
   </div>
-  <button id="header-profile-btn" aria-label="Go to profile" class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90 transition-transform" style="outline:2px solid #cffc00;outline-offset:1px">
+  <button id="header-profile-btn" aria-label="Go to profile" class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90" style="outline:2px solid #cffc00;outline-offset:1px">
     <span class="material-symbols-outlined text-on-surface-variant icon-fill">person</span>
   </button>
 </header>
@@ -55,7 +55,7 @@
   <nav class="flex flex-col gap-1 p-4 pt-6">
     <p class="font-label text-[9px] text-on-surface-variant uppercase tracking-[0.2em] px-3 mb-2">Navigation</p>
     <button class="sidebar-btn nav-btn active flex items-center gap-3 px-3 py-3 text-left w-full" data-page="dashboard"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Dashboard</span></button>
-    <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="training"><span class="material-symbols-outlined text-xl">fitness_center</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Training</span></button>
+    <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="log"><span class="material-symbols-outlined text-xl">edit_note</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Daily Log</span></button>
     <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="fuel"><span class="material-symbols-outlined text-xl">local_fire_department</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Fuel Insights</span></button>
     <button class="sidebar-btn nav-btn flex items-center gap-3 px-3 py-3 text-left w-full" data-page="profile"><span class="material-symbols-outlined text-xl">person</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Profile</span></button>
   </nav>
@@ -70,7 +70,7 @@
 <!-- MAIN -->
 <main id="main-content" class="pt-20 pb-28 px-4 sm:px-5 w-full" style="max-width:560px;margin:0 auto">
 
-<!-- DASHBOARD -->
+<!-- ═══ DASHBOARD ═══ -->
 <div class="page active" id="page-dashboard">
   <div class="space-y-4 pt-2">
     <div class="pt-1">
@@ -139,7 +139,7 @@
       <div class="flex items-end gap-1.5 h-16" id="dash-week-chart"></div>
       <div class="flex justify-between mt-2 font-label text-[9px] text-on-surface-variant uppercase" id="dash-week-labels"></div>
     </div>
-    <!-- Insights preview -->
+    <!-- Insights -->
     <div>
       <header class="flex items-center justify-between mb-3">
         <div class="flex items-center gap-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Fuel Insights</h3></div>
@@ -159,42 +159,63 @@
   </div>
 </div>
 
-<!-- TRAINING -->
-<div class="page" id="page-training">
+<!-- ═══ DAILY LOG (renamed from Training) ═══ -->
+<div class="page" id="page-log">
   <div class="space-y-5 pt-2">
+    <!-- Header -->
     <div class="flex items-center justify-between pt-1">
-      <div><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Daily Log</p><h2 class="font-headline text-2xl font-extrabold tracking-tight">Training &amp; Fuel</h2></div>
+      <div>
+        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Daily Log</p>
+        <h2 class="font-headline text-2xl font-extrabold tracking-tight">Food &amp; Training</h2>
+      </div>
       <div class="flex gap-2">
-        <button onclick="App.openMealModal()" aria-label="Log meal" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-lg">restaurant</span></button>
-        <button onclick="App.openWorkoutModal()" aria-label="Log workout" class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-lg">fitness_center</span></button>
+        <button onclick="App.openMealModal()" aria-label="Log meal" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform" title="Log Meal">
+          <span class="material-symbols-outlined text-lg">restaurant</span>
+        </button>
+        <button onclick="App.openWorkoutModal()" aria-label="Log workout" class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center active:scale-90 transition-transform" title="Log Workout">
+          <span class="material-symbols-outlined text-lg">fitness_center</span>
+        </button>
       </div>
     </div>
 
     <!-- Date Navigator -->
     <div class="flex items-center gap-2 bg-surface-container-low rounded-2xl p-1">
-      <button onclick="App.shiftLogDate(-1)" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all"><span class="material-symbols-outlined text-lg">chevron_left</span></button>
+      <button onclick="App.shiftLogDate(-1)" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all">
+        <span class="material-symbols-outlined text-lg">chevron_left</span>
+      </button>
       <div class="flex-1 text-center">
         <p class="font-headline font-bold text-sm" id="log-date-label">Today</p>
         <p class="font-label text-[10px] text-on-surface-variant" id="log-date-sub"></p>
       </div>
-      <button onclick="App.shiftLogDate(1)" id="log-date-next" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+      <button onclick="App.shiftLogDate(1)" id="log-date-next" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all">
+        <span class="material-symbols-outlined text-lg">chevron_right</span>
+      </button>
     </div>
 
     <!-- Day summary strip -->
     <div id="log-day-summary" class="grid grid-cols-3 gap-3"></div>
 
+    <!-- 🥗 Food Log -->
     <section>
-      <header class="flex items-center gap-3 mb-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Meals</h3></header>
+      <header class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">🥗 Food</h3></div>
+        <button onclick="App.openMealModal()" class="font-label text-[10px] text-primary uppercase tracking-widest px-2 py-1 rounded-lg hover:bg-primary/10 transition-colors">+ Meal</button>
+      </header>
       <div id="log-meals-list" class="space-y-3"></div>
     </section>
+
+    <!-- 🏋️ Training Log -->
     <section>
-      <header class="flex items-center gap-3 mb-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">Training Sessions</h3></header>
+      <header class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">🏋️ Training</h3></div>
+        <button onclick="App.openWorkoutModal()" class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-2 py-1 rounded-lg hover:bg-surface-container transition-colors">+ Workout</button>
+      </header>
       <div id="log-workouts-list" class="space-y-3"></div>
     </section>
   </div>
 </div>
 
-<!-- FUEL INSIGHTS -->
+<!-- ═══ FUEL INSIGHTS ═══ -->
 <div class="page" id="page-fuel">
   <div class="space-y-5 pt-2">
     <div class="pt-1"><p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Smart Analysis</p><h2 class="font-headline text-2xl font-extrabold tracking-tight">Fuel Insights</h2></div>
@@ -203,11 +224,10 @@
       <div id="insights-list" class="space-y-3"></div>
     </section>
     <div id="goal-tip"></div>
-    <!-- Calculation Engine Breakdown -->
     <div class="bg-surface-container rounded-2xl p-5 relative overflow-hidden">
       <div class="absolute top-0 right-0 p-3 pointer-events-none select-none" style="opacity:.04"><span class="material-symbols-outlined" style="font-size:96px">calculate</span></div>
       <header class="flex items-center gap-3 mb-4"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Your Targets Explained</h3></header>
-      <div id="fuel-macro-breakdown" class="space-y-1"></div>
+      <div id="fuel-macro-breakdown"></div>
     </div>
     <section>
       <header class="flex items-center gap-3 mb-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-sm">7-Day Overview</h3></header>
@@ -243,19 +263,16 @@
   </div>
 </div>
 
-<!-- PROFILE -->
+<!-- ═══ PROFILE ═══ -->
 <div class="page" id="page-profile">
   <div class="space-y-6 pt-2">
-    <!-- Identity -->
     <section class="flex flex-col items-center text-center gap-4 pt-4">
       <div class="relative">
         <div class="absolute -inset-1 rounded-full blur opacity-20 pointer-events-none" style="background:linear-gradient(135deg,#f4ffc8,#cffc00)"></div>
         <div class="relative w-28 h-28 rounded-full bg-surface-container-highest flex items-center justify-center" style="outline:3px solid #0e0e0e">
           <span class="material-symbols-outlined icon-fill text-on-surface-variant" style="font-size:56px">person</span>
         </div>
-        <button onclick="App.toast('Photo upload coming soon!')" aria-label="Edit photo" class="absolute bottom-1 right-1 bg-primary text-on-primary p-2 rounded-full active:scale-95 transition-transform">
-          <span class="material-symbols-outlined text-sm">edit</span>
-        </button>
+        <button onclick="App.toast('Photo upload coming soon!')" class="absolute bottom-1 right-1 bg-primary text-on-primary p-2 rounded-full active:scale-95 transition-transform"><span class="material-symbols-outlined text-sm">edit</span></button>
       </div>
       <div>
         <h2 class="font-headline text-2xl font-extrabold tracking-tight" id="prof-display-name">ATHLETE</h2>
@@ -265,12 +282,10 @@
         </div>
       </div>
     </section>
-    <!-- Target chip -->
     <div class="flex items-center gap-4 rounded-xl p-4" style="background:rgba(244,255,200,.08);outline:1px solid rgba(244,255,200,.15)">
       <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-sm">bolt</span></div>
       <div class="min-w-0"><p class="font-headline font-bold text-primary text-sm truncate" id="prof-tdee-display">— KCAL TARGET</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tight" id="prof-macro-display">Set your profile to calculate</p></div>
     </div>
-    <!-- Physical metrics -->
     <section>
       <header class="flex items-center gap-3 mb-3"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider text-sm">Physical Metrics</h3></header>
       <div class="grid grid-cols-2 gap-3">
@@ -300,7 +315,6 @@
         </div>
       </div>
     </section>
-    <!-- Upcoming objective -->
     <section class="bg-surface-container rounded-xl p-5 relative overflow-hidden">
       <div class="absolute top-0 right-0 p-3 pointer-events-none select-none" style="opacity:.05"><span class="material-symbols-outlined" style="font-size:96px">sports_score</span></div>
       <header class="flex items-center gap-3 mb-5"><div class="accent-bar"></div><h3 class="font-headline font-bold uppercase tracking-wider">Upcoming Objective</h3></header>
@@ -315,19 +329,16 @@
             <button type="button" data-level="moderate" onclick="App.selectProfLevel('moderate')" class="prof-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#f4ffc8;color:#536600">Moderate</button>
             <button type="button" data-level="hard" onclick="App.selectProfLevel('hard')" class="prof-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Hard</button>
           </div>
-          <p class="font-label text-[10px] text-on-surface-variant mt-2">Light: ×30 kcal/kg · Moderate: ×35 kcal/kg · Hard: ×40 kcal/kg</p>
+          <p class="font-label text-[10px] text-on-surface-variant mt-2">Light ×30 · Moderate ×35 · Hard ×40 kcal/kg</p>
         </div>
       </div>
     </section>
-    <!-- System tuning -->
     <section>
       <header class="flex items-center gap-3 mb-3"><div class="accent-bar-muted"></div><h3 class="font-label font-semibold uppercase tracking-widest text-on-surface-variant text-xs">System Tuning</h3></header>
       <div class="bg-surface-container-low rounded-2xl overflow-hidden">
         <div class="flex items-center justify-between p-5">
           <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary-dim">straighten</span></div><div><p class="font-headline text-sm font-bold">Metric Units</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Kilograms, Kilometers</p></div></div>
-          <button id="metric-toggle" aria-label="Toggle metric units" aria-pressed="true" onclick="App.toggleMetric(this)" class="w-12 h-6 rounded-full relative flex items-center px-1 transition-colors bg-primary">
-            <div id="metric-thumb" class="w-4 h-4 bg-on-primary rounded-full transition-all ml-auto"></div>
-          </button>
+          <button id="metric-toggle" aria-label="Toggle metric units" aria-pressed="true" onclick="App.toggleMetric(this)" class="w-12 h-6 rounded-full relative flex items-center px-1 transition-colors bg-primary"><div id="metric-thumb" class="w-4 h-4 bg-on-primary rounded-full transition-all ml-auto"></div></button>
         </div>
         <div class="flex items-center justify-between p-5 cursor-pointer active:bg-surface-container-highest transition-colors group" style="border-top:1px solid rgba(72,72,71,.15)" onclick="App.toast('Smart alerts — coming soon!')">
           <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">notifications</span></div><div><p class="font-headline text-sm font-bold">Smart Alerts</p><p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Fueling &amp; Hydration windows</p></div></div>
@@ -346,11 +357,11 @@
 
 </main>
 
-<!-- BOTTOM NAV -->
+<!-- BOTTOM NAV — tab 2 now "Log" with edit_note icon -->
 <nav id="bottom-nav" class="fixed bottom-0 left-0 w-full flex justify-around items-center px-3 pb-5 pt-2 z-50" style="background:rgba(14,14,14,.88);backdrop-filter:blur(20px);border-top:1px solid #262626;box-shadow:0 -8px 24px rgba(0,0,0,.4)">
   <button class="nav-btn bottom-nav-btn active flex flex-col items-center gap-0.5 px-4 py-2" data-page="dashboard" aria-label="Dashboard"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Dashboard</span></button>
-  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="training" aria-label="Training"><span class="material-symbols-outlined text-xl">fitness_center</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Training</span></button>
-  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="fuel" aria-label="Fuel"><span class="material-symbols-outlined text-xl">local_fire_department</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Fuel</span></button>
+  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="log" aria-label="Daily Log"><span class="material-symbols-outlined text-xl">edit_note</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Log</span></button>
+  <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="fuel" aria-label="Fuel Insights"><span class="material-symbols-outlined text-xl">local_fire_department</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Fuel</span></button>
   <button class="nav-btn bottom-nav-btn flex flex-col items-center gap-0.5 px-4 py-2" data-page="profile" aria-label="Profile"><span class="material-symbols-outlined text-xl">person</span><span class="font-headline text-[9px] font-medium tracking-widest uppercase">Profile</span></button>
 </nav>
 
@@ -362,7 +373,7 @@
     <div class="flex items-center gap-3 px-5 h-16" style="border-bottom:1px solid rgba(72,72,71,.2)"><h2 class="font-headline font-black text-xl text-[#D1FF00] uppercase tracking-widest">FuelSync</h2></div>
     <nav class="flex flex-col gap-1 p-4">
       <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="dashboard"><span class="material-symbols-outlined text-on-surface-variant">grid_view</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Dashboard</span></button>
-      <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="training"><span class="material-symbols-outlined text-on-surface-variant">fitness_center</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Training</span></button>
+      <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="log"><span class="material-symbols-outlined text-on-surface-variant">edit_note</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Daily Log</span></button>
       <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="fuel"><span class="material-symbols-outlined text-on-surface-variant">local_fire_department</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Fuel Insights</span></button>
       <button class="drawer-nav flex items-center gap-3 px-3 py-3 rounded-xl text-left w-full hover:bg-surface-container transition-colors" data-page="profile"><span class="material-symbols-outlined text-on-surface-variant">person</span><span class="font-headline font-semibold text-sm uppercase tracking-wider">Profile</span></button>
     </nav>
@@ -372,6 +383,7 @@
   </div>
 </div>
 
+<!-- ONBOARDING MODAL -->
 <div class="modal-overlay" id="modal-onboarding" onclick="if(event.target===this&&FS.getP().onboarded)document.getElementById('modal-onboarding').classList.remove('open')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="sheet-handle"></div>
@@ -390,10 +402,10 @@
         <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Weight kg</label><input type="number" id="ob-weight" placeholder="75" step="0.5" inputmode="decimal" oninput="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
         <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Height cm</label><input type="number" id="ob-height" placeholder="175" inputmode="numeric" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
       </div>
-      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Primary Goal</label><div class="relative"><select id="ob-goal" onchange="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer uppercase"><option value="endurance">General Endurance</option><option value="marathon">Marathon</option><option value="hyrox">HYROX</option><option value="hybrid">Hybrid — HYROX / OCR / CrossFit</option><option value="strength">Strength / Power</option><option value="weight_loss">Performance + Fat Loss</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
+      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Primary Goal</label><div class="relative"><select id="ob-goal" onchange="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer uppercase"><option value="endurance">General Endurance</option><option value="marathon">Marathon</option><option value="hyrox">HYROX</option><option value="hybrid">Hybrid — HYROX / OCR</option><option value="strength">Strength / Power</option><option value="weight_loss">Performance + Fat Loss</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
       <div>
         <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Typical Training Level <span style="text-transform:none;opacity:.7">(sets your daily macro targets)</span></label>
-        <div class="relative"><select id="ob-level" onchange="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer"><option value="light">Light — easy / recovery days (×30 kcal/kg)</option><option value="moderate" selected>Moderate — standard training (×35 kcal/kg)</option><option value="hard">Hard — long runs / race-pace (×40 kcal/kg)</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div>
+        <div class="relative"><select id="ob-level" onchange="App.updateObTargets()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer"><option value="light">Light — easy / recovery (×30 kcal/kg)</option><option value="moderate" selected>Moderate — standard training (×35 kcal/kg)</option><option value="hard">Hard — long runs / race-pace (×40 kcal/kg)</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div>
         <div id="ob-targets-preview" class="mt-2 rounded-xl p-3 font-label text-[10px] text-primary uppercase tracking-wide" style="background:rgba(244,255,200,.08);outline:1px solid rgba(244,255,200,.15)">Enter your weight to preview targets</div>
       </div>
       <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Target Race / Event <span style="text-transform:none">(optional)</span></label><input type="text" id="ob-race" placeholder="e.g. HYROX Munich, Berlin Marathon..." class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
@@ -402,16 +414,30 @@
   </div>
 </div>
 
-<!-- MEAL MODAL -->
+<!-- LOG MEAL MODAL (with DB search) -->
 <div class="modal-overlay" id="modal-meal" onclick="if(event.target===this)App.closeMealModal()">
   <div class="modal-sheet">
     <div class="sheet-handle"></div>
-    <div class="flex items-center justify-between mb-5"><h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Meal</h2><button onclick="App.closeMealModal()" aria-label="Close" class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">close</span></button></div>
+    <div class="flex items-center justify-between mb-4"><h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Meal</h2><button onclick="App.closeMealModal()" aria-label="Close" class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90"><span class="material-symbols-outlined text-sm">close</span></button></div>
+
+    <!-- Meal DB Search -->
+    <div class="mb-4">
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm pointer-events-none">search</span>
+        <input type="text" id="meal-search" placeholder="Search 100 common athlete meals…" autocomplete="off"
+          oninput="App.renderMealDb(this.value)"
+          class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3 pl-9 pr-4 border-none text-sm font-body placeholder:text-on-surface-variant/50"/>
+      </div>
+      <div id="meal-db-results" class="mt-2 max-h-44 overflow-y-auto space-y-0.5"></div>
+    </div>
+
     <div class="space-y-4">
-      <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Name *</label><input type="text" id="meal-name" placeholder="e.g. Oat porridge with banana" autocomplete="off" onkeydown="if(event.key==='Enter')App.saveMeal()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="col-span-2"><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Name *</label><input type="text" id="meal-name" placeholder="e.g. Oat porridge with banana" autocomplete="off" onkeydown="if(event.key==='Enter')App.saveMeal()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
+      </div>
       <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Meal Type</label><div class="relative"><select id="meal-type" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-10 border-none text-sm font-headline appearance-none cursor-pointer"><option value="breakfast">🌅 Breakfast</option><option value="lunch">☀️ Lunch</option><option value="dinner">🌙 Dinner</option><option value="snack">🍎 Snack</option><option value="pre_workout">⚡ Pre-Workout</option><option value="post_workout">💪 Post-Workout</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
       <div class="bg-surface-container-lowest rounded-xl p-4 space-y-3">
-        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.15em]">Macros <span style="text-transform:none;opacity:.7">(estimate is fine)</span></p>
+        <p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.15em]">Macros <span style="text-transform:none;opacity:.7">(auto-filled from DB or enter manually)</span></p>
         <div class="grid grid-cols-2 gap-3">
           <div><label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1.5">Calories kcal</label><input type="number" id="meal-cal" placeholder="400" min="0" inputmode="numeric" class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-3 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
           <div><label class="font-label text-[9px] text-on-surface-variant uppercase tracking-wider block mb-1.5">Carbs g</label><input type="number" id="meal-carbs" placeholder="60" min="0" inputmode="numeric" class="w-full bg-surface-container text-on-surface rounded-lg py-3 px-3 border-none text-sm font-headline placeholder:text-on-surface-variant/50"/></div>
@@ -428,11 +454,11 @@
   </div>
 </div>
 
-<!-- WORKOUT MODAL -->
+<!-- LOG WORKOUT MODAL -->
 <div class="modal-overlay" id="modal-workout" onclick="if(event.target===this)App.closeWorkoutModal()">
   <div class="modal-sheet">
     <div class="sheet-handle"></div>
-    <div class="flex items-center justify-between mb-5"><h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Workout</h2><button onclick="App.closeWorkoutModal()" aria-label="Close" class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">close</span></button></div>
+    <div class="flex items-center justify-between mb-5"><h2 class="font-headline text-xl font-extrabold uppercase tracking-tight">Log Workout</h2><button onclick="App.closeWorkoutModal()" aria-label="Close" class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center active:scale-90"><span class="material-symbols-outlined text-sm">close</span></button></div>
     <div class="space-y-4">
       <div class="grid grid-cols-2 gap-3">
         <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Activity Type</label><div class="relative"><select id="wo-type" onchange="App.updateCalEstimate()" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 pr-9 border-none text-sm font-headline appearance-none cursor-pointer"><option value="run">🏃 Run</option><option value="bike">🚴 Bike</option><option value="swim">🏊 Swim</option><option value="hyrox">🏋️ HYROX</option><option value="strength">💪 Strength</option><option value="hiit">⚡ HIIT</option><option value="yoga">🧘 Yoga</option><option value="walk">🚶 Walk</option><option value="other">🏅 Other</option></select><span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span></div></div>
@@ -440,19 +466,16 @@
       </div>
       <div>
         <label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Training Level <span style="text-transform:none;opacity:.7">(drives today's macro targets)</span></label>
-        <div class="grid grid-cols-3 gap-2" id="wo-level-btns">
+        <div class="grid grid-cols-3 gap-2">
           <button type="button" data-level="light" onclick="App.selectWoLevel('light')" class="wo-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Light</button>
           <button type="button" data-level="moderate" onclick="App.selectWoLevel('moderate')" class="wo-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#f4ffc8;color:#536600">Moderate</button>
           <button type="button" data-level="hard" onclick="App.selectWoLevel('hard')" class="wo-level-btn py-3 rounded-xl font-headline font-bold text-sm uppercase tracking-wide transition-all" style="background:#262626;color:#adaaaa">Hard</button>
         </div>
         <input type="hidden" id="wo-intensity" value="moderate"/>
-        <p class="font-label text-[10px] text-on-surface-variant mt-2" id="wo-level-desc">Moderate effort — balanced targets for sustained performance</p>
+        <p class="font-label text-[10px] text-on-surface-variant mt-2" id="wo-level-desc">Standard training — balanced fuel targets</p>
       </div>
       <div class="rounded-xl p-4 space-y-2" style="background:rgba(244,255,200,.08);outline:1px solid rgba(244,255,200,.15)">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-sm">bolt</span></div>
-          <p class="font-headline font-bold text-primary text-sm" id="wo-cal-est">~— kcal estimated</p>
-        </div>
+        <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-sm">bolt</span></div><p class="font-headline font-bold text-primary text-sm" id="wo-cal-est">~— kcal estimated</p></div>
         <p class="font-label text-[10px] text-on-surface-variant pl-12" id="wo-macro-impact">Select level to see macro adjustment</p>
       </div>
       <div><label class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] block mb-2">Notes <span style="text-transform:none">(optional)</span></label><input type="text" id="wo-notes" placeholder="e.g. 10km tempo, 4:45/km pace" class="w-full bg-surface-container-highest text-on-surface rounded-xl py-3.5 px-4 border-none text-sm placeholder:text-on-surface-variant/50"/></div>
@@ -466,8 +489,9 @@
 
 <div id="toast"></div>
 
-<!-- Scripts -->
+<!-- Scripts — load order: engine → meals-db → data → app -->
 <script src="js/engine.js"></script>
+<script src="js/meals-db.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 
