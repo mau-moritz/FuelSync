@@ -21,6 +21,19 @@ const MEAL_DB = [
   { name:'French toast with berries',            cat:'breakfast',    cal:400, carbs:55, protein:16, fat:12 },
   { name:'Cereal (Weetabix) with semi-skimmed', cat:'breakfast',    cal:300, carbs:54, protein:12, fat:4  },
   { name:'TESTd', cat:'breakfast',    cal:300, carbs:54, protein:12, fat:4  },
+  { name:'Yogurt (Plain)',                cat:'breakfast', cal:120, carbs:10, protein:6,  fat:5 },
+{ name:'Greek Yogurt',                 cat:'breakfast', cal:150, carbs:8,  protein:12, fat:8 },
+{ name:'Yogurt with Honey',            cat:'breakfast', cal:180, carbs:20, protein:6,  fat:5 },
+{ name:'Yogurt with Fruit',            cat:'breakfast', cal:160, carbs:22, protein:6,  fat:4 },
+
+{ name:'Cheese Toast',                 cat:'breakfast', cal:350, carbs:30, protein:12, fat:20 },
+{ name:'Cheese Toast (2 slices)',      cat:'breakfast', cal:500, carbs:40, protein:18, fat:28 },
+
+{ name:'Ham Toast',                    cat:'breakfast', cal:300, carbs:30, protein:15, fat:12 },
+{ name:'Ham Toast (2 slices)',         cat:'breakfast', cal:450, carbs:40, protein:25, fat:18 },
+
+{ name:'Ham & Cheese Toast',           cat:'breakfast', cal:400, carbs:30, protein:20, fat:20 },
+{ name:'Ham & Cheese Toast (2 slices)',cat:'breakfast', cal:550, carbs:40, protein:30, fat:28 },
 
   // ── LUNCH ──────────────────────────────────────────────────────────────
   { name:'Chicken & rice bowl',                  cat:'lunch',        cal:520, carbs:58, protein:42, fat:10 },
@@ -38,7 +51,16 @@ const MEAL_DB = [
   { name:'Falafel pita with hummus',             cat:'lunch',        cal:510, carbs:64, protein:18, fat:18 },
   { name:'Chicken & vegetable stir fry + rice',  cat:'lunch',        cal:540, carbs:62, protein:38, fat:12 },
   { name:'Poke bowl (tuna, rice, edamame)',      cat:'lunch',        cal:520, carbs:60, protein:36, fat:14 },
+{ name:'Grilled Octopus',           cat:'lunch', cal:300, carbs:5,  protein:40, fat:10 },
+{ name:'Grilled Octopus with Olive Oil', cat:'lunch', cal:400, carbs:5,  protein:40, fat:20 },
 
+{ name:'Plain Hamburger',           cat:'lunch', cal:250, carbs:0,  protein:20, fat:18 },
+{ name:'Plain Hamburger (2 patties)',cat:'lunch', cal:500, carbs:0,  protein:40, fat:36 },
+
+{ name:'Pasta (Plain)',             cat:'lunch', cal:350, carbs:70, protein:12, fat:2 },
+{ name:'Pasta with Olive Oil',      cat:'lunch', cal:450, carbs:70, protein:12, fat:12 },
+{ name:'Pasta with Tomato Sauce',   cat:'lunch', cal:400, carbs:75, protein:14, fat:5 },
+{ name:'Pasta with Cheese',         cat:'lunch', cal:500, carbs:70, protein:18, fat:18 },
   // ── DINNER ─────────────────────────────────────────────────────────────
   { name:'Grilled chicken breast & veg',         cat:'dinner',       cal:380, carbs:10, protein:52, fat:12 },
   { name:'Salmon fillet with roasted potatoes',  cat:'dinner',       cal:520, carbs:40, protein:42, fat:18 },
@@ -58,6 +80,7 @@ const MEAL_DB = [
 
   // ── SNACKS ─────────────────────────────────────────────────────────────
   { name:'Banana',                               cat:'snack',        cal:90,  carbs:23, protein:1,  fat:0  },
+  { name:'Apple',                               cat:'snack',        cal:52,  carbs:14, protein:0.3,  fat:0  },
   { name:'Apple with peanut butter (1 tbsp)',    cat:'snack',        cal:190, carbs:28, protein:4,  fat:8  },
   { name:'Rice cakes (3) with hummus',           cat:'snack',        cal:180, carbs:28, protein:6,  fat:5  },
   { name:'Mixed nuts (30g)',                     cat:'snack',        cal:180, carbs:6,  protein:5,  fat:16 },
@@ -72,6 +95,45 @@ const MEAL_DB = [
   { name:'Jerky beef (30g)',                     cat:'snack',        cal:100, carbs:2,  protein:16, fat:3  },
   { name:'Mozzarella & tomato (small)',          cat:'snack',        cal:200, carbs:4,  protein:14, fat:14 },
   { name:'Trail mix (30g)',                      cat:'snack',        cal:150, carbs:16, protein:3,  fat:8  },
+  { name:'Beer 0.3L',              cat:'snack', cal:135, carbs:11, protein:1, fat:0 },
+  { name:'Beer 0.5L',              cat:'snack', cal:225, carbs:18, protein:2, fat:0 },
+  { name:'Beer 1L',                cat:'snack', cal:450, carbs:36, protein:3, fat:0 },
+{ name:'Vodka Shot',                 cat:'snack', cal:65,  carbs:0,  protein:0, fat:0 },
+{ name:'Tequila Shot',               cat:'snack', cal:65,  carbs:0,  protein:0, fat:0 },
+{ name:'Whiskey Shot',               cat:'snack', cal:70,  carbs:0,  protein:0, fat:0 },
+{ name:'Rum Shot',                   cat:'snack', cal:70,  carbs:0,  protein:0, fat:0 },
+{ name:'Gin Shot',                   cat:'snack', cal:65,  carbs:0,  protein:0, fat:0 },
+
+{ name:'Vodka Soda',                 cat:'snack', cal:100, carbs:2,  protein:0, fat:0 },
+{ name:'Gin & Tonic',                cat:'snack', cal:160, carbs:14, protein:0, fat:0 },
+{ name:'Rum & Coke',                 cat:'snack', cal:180, carbs:20, protein:0, fat:0 },
+{ name:'Whiskey & Coke',             cat:'snack', cal:190, carbs:20, protein:0, fat:0 },
+{ name:'Vodka Orange',               cat:'snack', cal:180, carbs:18, protein:0, fat:0 },
+
+{ name:'Mojito',                     cat:'snack', cal:170, carbs:16, protein:0, fat:0 },
+{ name:'Caipirinha',                 cat:'snack', cal:200, carbs:22, protein:0, fat:0 },
+{ name:'Margarita',                  cat:'snack', cal:200, carbs:20, protein:0, fat:0 },
+{ name:'Piña Colada',                cat:'snack', cal:300, carbs:30, protein:1, fat:10 },
+{ name:'Daiquiri',                   cat:'snack', cal:180, carbs:20, protein:0, fat:0 },
+
+{ name:'Aperol Spritz',              cat:'snack', cal:180, carbs:18, protein:0, fat:0 },
+{ name:'Hugo Spritz',                cat:'snack', cal:160, carbs:16, protein:0, fat:0 },
+
+{ name:'Red Wine Glass (150ml)',     cat:'snack', cal:125, carbs:4,  protein:0, fat:0 },
+{ name:'White Wine Glass (150ml)',   cat:'snack', cal:120, carbs:4,  protein:0, fat:0 },
+{ name:'Rosé Wine Glass (150ml)',    cat:'snack', cal:120, carbs:4,  protein:0, fat:0 },
+
+{ name:'Champagne Glass (150ml)',    cat:'snack', cal:110, carbs:3,  protein:0, fat:0 },
+
+{ name:'Cider 0.3L',                 cat:'snack', cal:150, carbs:18, protein:0, fat:0 },
+{ name:'Cider 0.5L',                 cat:'snack', cal:250, carbs:30, protein:0, fat:0 },
+
+{ name:'Energy Drink Vodka',         cat:'snack', cal:220, carbs:25, protein:0, fat:0 },
+{ name:'Long Island Iced Tea',       cat:'snack', cal:300, carbs:25, protein:0, fat:0 },
+{ name:'Espresso Martini',           cat:'snack', cal:200, carbs:18, protein:1, fat:0 },
+
+{ name:'Shots Mix (3 shots)',        cat:'snack', cal:200, carbs:5,  protein:0, fat:0 },
+{ name:'Cocktail Night Avg (2 drinks)',cat:'snack', cal:350, carbs:35, protein:0, fat:0 },
 
   // ── PRE-WORKOUT ────────────────────────────────────────────────────────
   { name:'Banana & rice cakes (2)',              cat:'pre_workout',  cal:210, carbs:48, protein:3,  fat:1  },
